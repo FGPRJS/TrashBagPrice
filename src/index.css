@@ -11,3 +11,21 @@
 
     position:relative;
 }
+
+.region {
+    position:relative;
+
+    fill:blueviolet;
+  
+    transition-duration: .2s;
+  
+    z-index: 0;
+}
+
+.region :hover{
+    fill:crimson;
+  
+    transition-duration: .2s;
+  
+    z-index: 1;
+  }

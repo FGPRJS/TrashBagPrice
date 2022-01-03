@@ -18,6 +18,7 @@ export default class Mainmap extends React.Component {
                 console.error(error);
                 return;
             }
+            svg.classList.add('region');
             console.log(svg);
         }
         }
