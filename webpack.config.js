@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
+  mode:"development",
+
   entry: path.join(__dirname, "src", "index.js"),
   output: {
     path:path.resolve(__dirname, "dist"),
@@ -21,6 +23,16 @@ export default {
           }
         }
       },
+      {
+        test: /\.(png|svg|jpg)$/,
+        use: [
+            'file-loader',
+        ],
+    },
+    {
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+    },
     ]
   },
   plugins: [
