@@ -20,6 +20,8 @@ export default class Mainmap extends React.Component {
     constructor(props){
         super(props);
 
+        this.state = {width : 1000, height : 1300}
+
         this.current_viewbox = new ViewBox(0,0,1200,1080);
         this.new_viewbox = new ViewBox(0,0,1200,1080);
         this.pointerOrigin = new ViewBox(0,0,0,0);
@@ -28,6 +30,8 @@ export default class Mainmap extends React.Component {
     }
 
     updateDimensions = () => {
+        this.setState({width : window.innerHeight, height : window.innerWidth});
+
         this.svg.setAttribute('width', window.innerWidth);
         this.svg.setAttribute('height',window.innerHeight);
     };
