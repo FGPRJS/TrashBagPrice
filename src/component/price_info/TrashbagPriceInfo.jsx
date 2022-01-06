@@ -18,6 +18,7 @@ export default class TrashbagPriceInfo extends React.Component {
             width : `${this.state.width}px`,
             height: `${this.state.height}px`,
 
+
             position: 'absolute',
             top: this.state.position_y,
             left : this.state.position_x,
