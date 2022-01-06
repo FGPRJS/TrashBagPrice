@@ -20,16 +20,13 @@ export default class Mainmap extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {width : 1000, height : 1300};
+        this.state = {width : 1000, height : 1300, info_x : 100, info_y : 100};
 
         this.current_viewbox = new ViewBox(0,0,1200,1080);
         this.new_viewbox = new ViewBox(0,0,1200,1080);
         this.pointerOrigin = new ViewBox(0,0,0,0);
         this.isPointerDown = false;
         this.svg = null;
-
-        this.info_x = 0;
-        this.info_y = 0;
     }
 
     updateDimensions = () => {
@@ -77,8 +74,7 @@ export default class Mainmap extends React.Component {
         this.pointerOrigin.x = pointerPosition.x;
         this.pointerOrigin.y = pointerPosition.y;
 
-        this.info_x = event.offsetX;
-        this.info_y = event.offsetY;
+        //this.setState({info_x : event.offsetX, info_y : event.offsetY});
     }
 
      // Function called by the event listeners when user start moving/dragging
