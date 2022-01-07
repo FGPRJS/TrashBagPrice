@@ -1,7 +1,6 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import map from '../../../resource/kr.svg';
-import TrashbagPriceInfo from "../price_info/TrashbagPriceInfo.jsx";
 
 class ViewBox {
     constructor(x, y, width, height){
@@ -15,27 +14,12 @@ class ViewBox {
         return [this.x, this.y, this.width, this.height].join(' ')
     }
 }
-
-class ViewBox {
-    constructor(x, y, width, height){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
-
-    getString(){
-        return [this.x, this.y, this.width, this.height].join(' ')
-    }
-}
-
 
 export default class Mainmap extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {width : 1000, height : 1300, info_x : 100, info_y : 100};
-
+        this.state = {width : 1000, height : 1300};
 
         this.current_viewbox = new ViewBox(0,0,1200,1080);
         this.new_viewbox = new ViewBox(0,0,1200,1080);
@@ -45,8 +29,6 @@ export default class Mainmap extends React.Component {
     }
 
     updateDimensions = () => {
-        this.setState({width : window.innerHeight, height : window.innerWidth});
-
         this.svg.setAttribute('width', window.innerWidth);
         this.svg.setAttribute('height',window.innerHeight);
     };
@@ -71,7 +53,7 @@ export default class Mainmap extends React.Component {
         return point;
     }
 
-    onPointerUp() {
+    onPointerUp(event) {
         // The pointer is no longer considered as down
         this.isPointerDown = false;
       
@@ -89,9 +71,6 @@ export default class Mainmap extends React.Component {
         var pointerPosition = this.getPointFromEvent(event);
         this.pointerOrigin.x = pointerPosition.x;
         this.pointerOrigin.y = pointerPosition.y;
-
-        this.setState({info_x : event.offsetX, info_y : event.offsetY});
-
     }
 
      // Function called by the event listeners when user start moving/dragging
@@ -129,7 +108,6 @@ export default class Mainmap extends React.Component {
           this.current_viewbox.height /=1.10;
         }
       
-      
         // this.current_viewbox.x -= (this.current_viewbox.width - tempViewBoxWidth) / 2;
         // this.current_viewbox.y -= (this.current_viewbox.height - tempViewBoxHeight) / 2; 
       
@@ -138,44 +116,46 @@ export default class Mainmap extends React.Component {
       }
 
     render(){
-        return <ReactSVG
-            beforeInjection = {(svg) => {
-                this.svg = svg;
-                svg.setAttribute('width','1000');
-                svg.setAttribute('height','1300');
-                svg.setAttribute('viewBox','0 0 1200 1080');
+        return <div>
+            <ReactSVG
+                beforeInjection = {(svg) => {
+                    this.svg = svg;
+                    svg.setAttribute('width','1000');
+                    svg.setAttribute('height','1300');
+                    svg.setAttribute('viewBox','0 0 1200 1080');
 
-                if (window.PointerEvent) {
-                    svg.addEventListener('pointerdown', this.onPointerDown.bind(this)); // Pointer is pressed
-                    svg.addEventListener('pointerup', this.onPointerUp.bind(this)); // Releasing the pointer
-                    svg.addEventListener('pointerleave', this.onPointerUp.bind(this)); // Pointer gets out of the SVG area
-                    svg.addEventListener('pointermove', this.onPointerMove.bind(this)); // Pointer is moving
-                    svg.addEventListener('wheel', this.onZoom.bind(this));
-                } else {
-                    // Add all mouse events listeners fallback
-                    svg.addEventListener('mousedown', this.onPointerDown.bind(this)); // Pressing the mouse
-                    svg.addEventListener('mouseup', this.onPointerUp.bind(this)); // Releasing the mouse
-                    svg.addEventListener('mouseleave', this.onPointerUp.bind(this)); // Mouse gets out of the SVG area
-                    svg.addEventListener('mousemove', this.onPointerMove.bind(this)); // Mouse is moving
+                    if (window.PointerEvent) {
+                        svg.addEventListener('pointerdown', this.onPointerDown.bind(this)); // Pointer is pressed
+                        svg.addEventListener('pointerup', this.onPointerUp.bind(this)); // Releasing the pointer
+                        svg.addEventListener('pointerleave', this.onPointerUp.bind(this)); // Pointer gets out of the SVG area
+                        svg.addEventListener('pointermove', this.onPointerMove.bind(this)); // Pointer is moving
+                        svg.addEventListener('wheel', this.onZoom.bind(this));
+                    } else {
+                        // Add all mouse events listeners fallback
+                        svg.addEventListener('mousedown', this.onPointerDown.bind(this)); // Pressing the mouse
+                        svg.addEventListener('mouseup', this.onPointerUp.bind(this)); // Releasing the mouse
+                        svg.addEventListener('mouseleave', this.onPointerUp.bind(this)); // Mouse gets out of the SVG area
+                        svg.addEventListener('mousemove', this.onPointerMove.bind(this)); // Mouse is moving
 
-                    // Add all touch events listeners fallback
-                    svg.addEventListener('touchstart', this.onPointerDown.bind(this)); // Finger is touching the screen
-                    svg.addEventListener('touchend', this.onPointerUp.bind(this)); // Finger is no longer touching the screen
-                    svg.addEventListener('touchmove', this.onPointerMove.bind(this)); // Finger is moving
+                        // Add all touch events listeners fallback
+                        svg.addEventListener('touchstart', this.onPointerDown.bind(this)); // Finger is touching the screen
+                        svg.addEventListener('touchend', this.onPointerUp.bind(this)); // Finger is no longer touching the screen
+                        svg.addEventListener('touchmove', this.onPointerMove.bind(this)); // Finger is moving
+                    }
+                }}
+    
+                afterInjection = {(error, svg) => {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+                    svg.classList.add('region');
+                    console.log(svg.classList);
                 }
-            }}
- 
-             afterInjection = {(error, svg) => {
-                 if (error) {
-                     console.error(error);
-                     return;
-                 }
-                 svg.classList.add('region');
-                 console.log(svg.classList);
-             }
-             }
- 
-             src = {map}
-        ></ReactSVG>
+                }
+    
+                src = {map}
+            ></ReactSVG>
+        </div>
      }
 }
