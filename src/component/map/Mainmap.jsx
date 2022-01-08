@@ -19,8 +19,6 @@ export default class Mainmap extends React.Component {
     constructor(props){
         super(props);
 
-        this.state = {width : 1000, height : 1300};
-
         this.current_viewbox = new ViewBox(0,0,1200,1080);
         this.new_viewbox = new ViewBox(0,0,1200,1080);
         this.pointerOrigin = new ViewBox(0,0,0,0);
@@ -29,8 +27,8 @@ export default class Mainmap extends React.Component {
     }
 
     updateDimensions = () => {
-        this.svg.setAttribute('width', window.innerWidth);
-        this.svg.setAttribute('height',window.innerHeight);
+        this.svg.setAttribute('width', window.innerWidth - 50);
+        this.svg.setAttribute('height',window.innerHeight - 50);
     };
     componentDidMount() {
         window.addEventListener('resize', this.updateDimensions);
@@ -150,6 +148,8 @@ export default class Mainmap extends React.Component {
                         return;
                     }
                     svg.classList.add('region');
+                    svg.setAttribute('width', window.innerWidth - 50);
+                    svg.setAttribute('height',window.innerHeight - 50);
                     console.log(svg.classList);
                 }
                 }
