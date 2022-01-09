@@ -7,7 +7,9 @@ export default class App extends React.Component {
     render(){
         return <div id = "map_wrapper">
             <Mainmap/>
-            <TrashbagPriceInfo></TrashbagPriceInfo>
+            <TrashbagPriceInfo
+                commentText = "sdfsdf"
+            ></TrashbagPriceInfo>
         </div>
     }
 }

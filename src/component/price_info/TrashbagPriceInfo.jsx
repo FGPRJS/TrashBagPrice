@@ -1,9 +1,18 @@
 import React from "react";
+import EventBus from "../../event/EventBus";
 
 export default class TrashbagPriceInfo extends React.Component {
+   
+    ElementClicked(){
+        console.log("clicked");
+    }
 
-    constructor(props){
-        super(props);
+    componentDidMount(){
+        EventBus.on("ElementClick", this.ElementClicked.bind(this));
+    }
+
+    componentWillUnmount(){
+        EventBus.remove("ElementClick");
     }
 
     render(){
@@ -22,7 +31,7 @@ export default class TrashbagPriceInfo extends React.Component {
         }
 
         return <div id="trashbag_price_info" style = {styles}>
-            <span>Hello World!</span>
+            <h1>{this.props.commentText}</h1>
         </div>;
     }
 }

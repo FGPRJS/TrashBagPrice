@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import map from '../../../resource/kr.svg';
+import EventBus from "../../event/EventBus";
 
 class ViewBox {
     constructor(x, y, width, height){
@@ -27,7 +28,7 @@ export default class Mainmap extends React.Component {
     }
 
     updateDimensions = () => {
-        this.svg.setAttribute('width', window.innerWidth - 50);
+        this.svg.setAttribute('width', window.innerWidth);
         this.svg.setAttribute('height',window.innerHeight - 50);
     };
     componentDidMount() {
@@ -58,6 +59,8 @@ export default class Mainmap extends React.Component {
         // We save the viewBox coordinates based on the last pointer offsets
         this.current_viewbox.x = this.new_viewbox.x;
         this.current_viewbox.y = this.new_viewbox.y;
+
+        EventBus.dispatch("ElementClick", { message: "coupone applied" });
       }
 
     // Function called by the event listeners when user start pressing/touching
@@ -118,8 +121,8 @@ export default class Mainmap extends React.Component {
             <ReactSVG
                 beforeInjection = {(svg) => {
                     this.svg = svg;
-                    svg.setAttribute('width','1000');
-                    svg.setAttribute('height','1300');
+                    svg.setAttribute('width', window.innerWidth);
+                    svg.setAttribute('height',window.innerHeight - 50);
                     svg.setAttribute('viewBox','0 0 1200 1080');
 
                     if (window.PointerEvent) {
@@ -148,8 +151,6 @@ export default class Mainmap extends React.Component {
                         return;
                     }
                     svg.classList.add('region');
-                    svg.setAttribute('width', window.innerWidth - 50);
-                    svg.setAttribute('height',window.innerHeight - 50);
                     console.log(svg.classList);
                 }
                 }
