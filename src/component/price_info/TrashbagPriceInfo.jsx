@@ -3,8 +3,8 @@ import EventBus from "../../event/EventBus";
 
 export default class TrashbagPriceInfo extends React.Component {
    
-    ElementClicked(){
-        console.log("clicked");
+    ElementClicked(event){
+        console.log(event);
     }
 
     componentDidMount(){

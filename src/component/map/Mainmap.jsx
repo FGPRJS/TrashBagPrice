@@ -59,8 +59,6 @@ export default class Mainmap extends React.Component {
         // We save the viewBox coordinates based on the last pointer offsets
         this.current_viewbox.x = this.new_viewbox.x;
         this.current_viewbox.y = this.new_viewbox.y;
-
-        EventBus.dispatch("ElementClick", { message: "coupone applied" });
       }
 
     // Function called by the event listeners when user start pressing/touching
@@ -116,6 +114,13 @@ export default class Mainmap extends React.Component {
         this.svg.setAttribute('viewBox', viewBoxString);
       }
 
+      onClick(event){
+        let element = event.srcElement;  
+        if(element && element.attributes['name']){
+            EventBus.dispatch("ElementClick", { element: element.attributes['name'].nodeValue});
+        }
+      }
+
     render(){
         return <div>
             <ReactSVG
@@ -131,6 +136,7 @@ export default class Mainmap extends React.Component {
                         svg.addEventListener('pointerleave', this.onPointerUp.bind(this)); // Pointer gets out of the SVG area
                         svg.addEventListener('pointermove', this.onPointerMove.bind(this)); // Pointer is moving
                         svg.addEventListener('wheel', this.onZoom.bind(this));
+                        svg.addEventListener('click', this.onClick.bind(this));
                     } else {
                         // Add all mouse events listeners fallback
                         svg.addEventListener('mousedown', this.onPointerDown.bind(this)); // Pressing the mouse
