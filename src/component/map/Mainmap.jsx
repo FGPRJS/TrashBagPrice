@@ -2,6 +2,8 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import map from '../../../resource/kr.svg';
 import EventBus from "../../event/EventBus";
+import AppQueryMaker from "../communicator/AppQueryMaker";
+import LocationName from "../../entity/LocationName";
 
 class ViewBox {
     constructor(x, y, width, height){
@@ -117,7 +119,11 @@ export default class Mainmap extends React.Component {
       onClick(event){
         let element = event.srcElement;  
         if(element && element.attributes['name']){
-            EventBus.dispatch("ElementClick", { element: element.attributes['name'].nodeValue});
+            let location = element.attributes['name'].nodeValue;
+
+            if(LocationName.hasOwnProperty(location)){
+                EventBus.dispatch("ElementClick", { target: LocationName[location]});
+            }
         }
       }
 
