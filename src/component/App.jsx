@@ -19,12 +19,8 @@ export default class App extends React.Component {
     }
 
     render(){
-        return <div id = "super_wrapper">
-            <div id = "map_wrapper">
-                <Mainmap/>
-                <RegionSelector></RegionSelector>
-                <RegionInfo></RegionInfo>
-            </div>
+        return <div id = "map_wrapper">
+            <Mainmap/>
             <TrashbagPriceInfo
                 commentText = "sdfsdf"
             ></TrashbagPriceInfo>
