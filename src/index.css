@@ -48,6 +48,19 @@
     border: 3px solid #676767;
 }
 
+#RegionInfo{
+    position: absolute;
+    
+    box-sizing: border-box;
+
+    right: 0%;
+    width : 200px;
+    height: 100px;
+
+    background-color: #e3e3e3;
+    border: 3px solid #676767;
+}
+
 #TrashbagPriceInfo{
     position: absolute;
     
