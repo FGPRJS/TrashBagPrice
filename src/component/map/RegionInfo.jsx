@@ -8,7 +8,7 @@ export default class RegionInfo extends React.Component{
 
         this.state = {
             locationtext : "",
-            visible : false
+            styleName : "toTransparent"
         };
     }
 
@@ -17,14 +17,14 @@ export default class RegionInfo extends React.Component{
 
         this.setState({
             locationtext : locationname,
-            visible : true
+            styleName : "toVisible"
         })
     }
 
     onLeave(event){
         this.setState({
             locationtext : "",
-            visible : false
+            styleName : "toTransparent"
         })
     }
 
@@ -39,7 +39,7 @@ export default class RegionInfo extends React.Component{
     }
 
     render(){
-        return <div hidden = {!this.state.visible} id="RegionInfo">
+        return <div id="RegionInfo" className={this.state.styleName}>
             <span>{this.state.locationtext}</span>
         </div>
     }

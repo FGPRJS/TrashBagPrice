@@ -7,28 +7,35 @@ export default class RegionSelector extends React.Component{
         super(props);
 
         this.state = {
-            styleName : 'left_n20'
+            styleName : 'left_n300px'
         }
     }
 
-    ElementClicked(event){       
-        console.log("clicked");
-        
+    RegionClicked(event){       
         this.setState({
-            styleName : 'left_0'
+            styleName : 'left_0px'
+        })
+    }
+
+    NonRegionClicked(event){       
+        this.setState({
+            styleName : 'left_n300px'
         })
     }
 
     componentDidMount(){
-        EventBus.on("ElementClick", this.ElementClicked.bind(this));
+        EventBus.on("RegionClick", this.RegionClicked.bind(this));
+        EventBus.on("NonRegionClick", this.NonRegionClicked.bind(this));
     }
 
     componentWillUnmount(){
-        EventBus.remove("ElementClick");
+        EventBus.on("RegionClick");
+        EventBus.remove("NonRegionClick");
     }
 
 
     render(){
+        //return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
         return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
 
         </div>

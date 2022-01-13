@@ -135,8 +135,11 @@ export default class Mainmap extends React.Component {
             let location = element.attributes['name'].nodeValue;
 
             if(LocationName.hasOwnProperty(location)){
-                EventBus.dispatch("ElementClick", { target: LocationName[location]});
+                EventBus.dispatch("RegionClick", { target: LocationName[location]});
             }
+        }
+        else{
+            EventBus.dispatch("NonRegionClick", { target: LocationName[location]});
         }
       }
 
