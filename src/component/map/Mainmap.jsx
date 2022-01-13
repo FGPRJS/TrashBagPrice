@@ -2,6 +2,8 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import map from '../../../resource/kr.svg';
 import EventBus from "../../event/EventBus";
+import AppQueryMaker from "../communicator/AppQueryMaker";
+import LocationName from "../../entity/LocationName";
 
 class ViewBox {
     constructor(x, y, width, height){
@@ -74,6 +76,19 @@ export default class Mainmap extends React.Component {
 
      // Function called by the event listeners when user start moving/dragging
     onPointerMove (event) {
+
+        let element = event.srcElement;  
+        if(element && element.attributes['name']){
+            let location = element.attributes['name'].nodeValue;
+
+            if(LocationName.hasOwnProperty(location)){
+                EventBus.dispatch("ElementHover", { target: LocationName[location]});
+            }
+        }
+        else{
+            EventBus.dispatch("ElementLeave", {});
+        }
+
         // Only run this function if the pointer is down
         if (!this.isPointerDown) {
         return;
@@ -117,7 +132,11 @@ export default class Mainmap extends React.Component {
       onClick(event){
         let element = event.srcElement;  
         if(element && element.attributes['name']){
-            EventBus.dispatch("ElementClick", { element: element.attributes['name'].nodeValue});
+            let location = element.attributes['name'].nodeValue;
+
+            if(LocationName.hasOwnProperty(location)){
+                EventBus.dispatch("ElementClick", { target: LocationName[location]});
+            }
         }
       }
 
@@ -137,6 +156,7 @@ export default class Mainmap extends React.Component {
                         svg.addEventListener('pointermove', this.onPointerMove.bind(this)); // Pointer is moving
                         svg.addEventListener('wheel', this.onZoom.bind(this));
                         svg.addEventListener('click', this.onClick.bind(this));
+                        
                     } else {
                         // Add all mouse events listeners fallback
                         svg.addEventListener('mousedown', this.onPointerDown.bind(this)); // Pressing the mouse
