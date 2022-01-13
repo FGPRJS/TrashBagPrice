@@ -1,5 +1,4 @@
 import React from "react";
-import AppQueryMaker from "./communicator/AppQueryMaker.js";
 import Mainmap from "./map/Mainmap.jsx";
 import RegionInfo from "./map/RegionInfo.jsx";
 import TrashbagPriceInfo from "./price_info/TrashbagPriceInfo.jsx";
