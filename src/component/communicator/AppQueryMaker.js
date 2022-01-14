@@ -20,22 +20,6 @@ export default class AppQueryMaker {
         return newQuery;
     }
 
-    temp(){
-        let newQuery = AppQueryMaker.makeBaseQuery();
-
-        console.log(LocationName[location]);
-
-        newQuery.appendConditionQuery('CTPRVN_NM',LocationName[location]);
-
-        fetch(newQuery.url + newQuery.getResult())
-        .then(response => 
-            response.json()
-        )
-        .then(data => {
-            console.log(data);
-        })
-    }
-
     appendConditionQuery(target,value){
         this.resultQuery += '&';
         this.resultQuery += encodeURIComponent(target);

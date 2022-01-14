@@ -1,5 +1,7 @@
 import React from "react";
+import RegionName from "../../entity/RegionName";
 import EventBus from "../../event/EventBus";
+import AppQueryMaker from "../communicator/AppQueryMaker";
 
 export default class RegionSelector extends React.Component{
     
@@ -7,19 +9,39 @@ export default class RegionSelector extends React.Component{
         super(props);
 
         this.state = {
-            styleName : 'left_n300px'
+            styleName : 'left_n300px',
+            locationName : "",
+            regions : []
         }
     }
 
-    RegionClicked(event){       
+    RegionClicked(event){
         this.setState({
-            styleName : 'left_0px'
+            styleName : 'left_0px',
+            locationName : event.target,
+            regions : RegionName[event.target]
+        })
+    }
+
+    temp(event){
+        let newQuery = AppQueryMaker.makeBaseQuery();
+
+        newQuery.appendConditionQuery('CTPRVN_NM',event.target);
+
+        fetch(newQuery.url + newQuery.getResult())
+        .then(response => 
+            response.json()
+        )
+        .then(data => {
+            console.log(data);
         })
     }
 
     NonRegionClicked(event){       
         this.setState({
-            styleName : 'left_n300px'
+            styleName : 'left_n300px',
+            locationName : "",
+            regions : []
         })
     }
 
@@ -33,11 +55,14 @@ export default class RegionSelector extends React.Component{
         EventBus.remove("NonRegionClick");
     }
 
-
     render(){
-        //return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
         return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
-
+            <div>{this.state.locationName}</div>
+            {
+                this.state.regions.map((item, index) => {
+                    return <div key = {index}>{item}</div>;
+                })
+            }
         </div>
     }
 }
