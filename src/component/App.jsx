@@ -1,7 +1,6 @@
 import React from "react";
 import Mainmap from "./map/Mainmap.jsx";
 import RegionInfo from "./map/RegionInfo.jsx";
-import TrashbagPriceInfo from "./price_info/TrashbagPriceInfo.jsx";
 import RegionSelector from "./userinput/RegionSelector.jsx";
 
 export default class App extends React.Component {
@@ -24,9 +23,6 @@ export default class App extends React.Component {
                 <RegionSelector></RegionSelector>
                 <RegionInfo></RegionInfo>
             </div>
-            <TrashbagPriceInfo
-                commentText = "sdfsdf"
-            ></TrashbagPriceInfo>
         </div>
     }
 }

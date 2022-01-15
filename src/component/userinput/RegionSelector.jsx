@@ -11,7 +11,8 @@ export default class RegionSelector extends React.Component{
         this.state = {
             styleName : 'left_n300px',
             locationName : "",
-            regions : []
+            regions : [],
+            resultdata : {}
         }
     }
 
@@ -19,29 +20,21 @@ export default class RegionSelector extends React.Component{
         this.setState({
             styleName : 'left_0px',
             locationName : event.target,
-            regions : RegionName[event.target]
+            regions : RegionName[event.target],
+            resultdata : {}
         })
     }
 
     temp(event){
-        let newQuery = AppQueryMaker.makeBaseQuery();
-
-        newQuery.appendConditionQuery('CTPRVN_NM',event.target);
-
-        fetch(newQuery.url + newQuery.getResult())
-        .then(response => 
-            response.json()
-        )
-        .then(data => {
-            console.log(data);
-        })
+        
     }
 
     NonRegionClicked(event){       
         this.setState({
             styleName : 'left_n300px',
             locationName : "",
-            regions : []
+            regions : [],
+            resultdata : {}
         })
     }
 
@@ -55,14 +48,47 @@ export default class RegionSelector extends React.Component{
         EventBus.remove("NonRegionClick");
     }
 
+
+    searchClick(event){
+        console.log(event);
+
+        let selectElement = document.querySelector('#RegionSelection');
+
+        let output = selectElement.options[selectElement.selectedIndex].value;
+
+        let newQuery = AppQueryMaker.makeBaseQuery();
+
+        console.log(event.target + " " + output);
+
+        newQuery.appendConditionQuery('CTPRVN_NM',this.state.locationName);
+        newQuery.appendConditionQuery('SIGNGU_NM',output);
+
+        fetch(newQuery.url + newQuery.getResult())
+        .then(response => 
+            response.json()
+        )
+        .then(data => {
+console.log(data);
+
+            this.setState({
+                resultdata : data
+            })
+        })
+
+        
+    }
+
     render(){
         return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
             <div>{this.state.locationName}</div>
+            <select id="RegionSelection">
             {
                 this.state.regions.map((item, index) => {
-                    return <div key = {index}>{item}</div>;
+                    return <option key = {index} >{item}</option>
                 })
             }
+            </select>
+            <button onClick={this.searchClick.bind(this)}>search</button>
         </div>
     }
 }
