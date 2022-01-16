@@ -50,26 +50,43 @@ export default class RegionSelector extends React.Component{
 
 
     searchClick(event){
-        console.log(event);
+        let newQuery = AppQueryMaker.makeBaseQuery();
+
+        newQuery.appendConditionQuery('CTPRVN_NM',this.state.locationName);
+
+        //Region Selector
 
         let selectElement = document.querySelector('#RegionSelection');
 
-        let output = selectElement.options[selectElement.selectedIndex].value;
+        let region = selectElement.options[selectElement.selectedIndex].value;
 
-        let newQuery = AppQueryMaker.makeBaseQuery();
+        newQuery.appendConditionQuery('SIGNGU_NM',region);
 
-        console.log(event.target + " " + output);
+        //Trashprpos Selector
 
-        newQuery.appendConditionQuery('CTPRVN_NM',this.state.locationName);
-        newQuery.appendConditionQuery('SIGNGU_NM',output);
+        const radioButtons = document.querySelectorAll('input[name="trashprpos"]');
 
-        fetch(newQuery.url + newQuery.getResult())
+        let selectedprpos;
+
+        for (const radioButton of radioButtons) {
+            if (radioButton.checked && radioButton.value != "") {
+                selectedprpos = radioButton.value;
+                newQuery.appendConditionQuery('WEIGHTED_ENVLP_PRPOS',selectedprpos);
+                break;
+            }
+        }
+
+        let result = newQuery.url + newQuery.getResult();
+
+        console.log(result);
+
+        fetch(result)
         .then(response => 
             response.json()
         )
         .then(data => {
-console.log(data);
 
+            console.log(data);
             this.setState({
                 resultdata : data
             })
@@ -88,6 +105,19 @@ console.log(data);
                 })
             }
             </select>
+            <div id = "trashprposwrapper">
+                <input type="radio" id = "trashtypeChoice1"
+                name="trashprpos" value="생활쓰레기"/>
+                <label htmlFor="trashtypeChoice1">생활</label>
+
+                <input type="radio" id = "trashtypeChoice2"
+                name="trashprpos" value="음식물쓰레기"/>
+                <label htmlFor="trashtypeChoice2">음식물</label>
+
+                <input type="radio" id = "trashtypeChoice3" defaultChecked={true}
+                name="trashprpos" value=""/>
+                <label htmlFor="trashtypeChoice3">모두</label>
+            </div>
             <button onClick={this.searchClick.bind(this)}>search</button>
         </div>
     }
