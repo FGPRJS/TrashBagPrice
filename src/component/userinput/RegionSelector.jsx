@@ -11,8 +11,7 @@ export default class RegionSelector extends React.Component{
         this.state = {
             styleName : 'left_n300px',
             locationName : "",
-            regions : [],
-            resultdata : {}
+            regions : []
         }
     }
 
@@ -20,8 +19,7 @@ export default class RegionSelector extends React.Component{
         this.setState({
             styleName : 'left_0px',
             locationName : event.target,
-            regions : RegionName[event.target],
-            resultdata : {}
+            regions : RegionName[event.target]
         })
     }
 
@@ -33,8 +31,7 @@ export default class RegionSelector extends React.Component{
         this.setState({
             styleName : 'left_n300px',
             locationName : "",
-            regions : [],
-            resultdata : {}
+            regions : []
         })
     }
 
@@ -85,11 +82,8 @@ export default class RegionSelector extends React.Component{
         .then(data => {
             console.log(data);
 
-            this.setState({
-                resultdata : data
-            })
-
             EventBus.dispatch("LoadComplete", {});
+            EventBus.dispatch("ShowResultData", {result : data});
         })
 
         //Fold

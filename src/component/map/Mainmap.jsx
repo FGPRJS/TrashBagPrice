@@ -2,7 +2,6 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import map from '../../../resource/kr.svg';
 import EventBus from "../../event/EventBus";
-import AppQueryMaker from "../communicator/AppQueryMaker";
 import LocationName from "../../entity/LocationName";
 
 class ViewBox {

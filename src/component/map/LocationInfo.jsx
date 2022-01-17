@@ -1,7 +1,7 @@
 import React from "react";
 import EventBus from "../../event/EventBus";
 
-export default class RegionInfo extends React.Component{
+export default class LocationInfo extends React.Component{
 
     constructor(props){
         super(props);
@@ -39,7 +39,7 @@ export default class RegionInfo extends React.Component{
     }
 
     render(){
-        return <div id="RegionInfo" className={this.state.styleName}>
+        return <div id="LocationName" className={this.state.styleName}>
             <span>{this.state.locationtext}</span>
         </div>
     }

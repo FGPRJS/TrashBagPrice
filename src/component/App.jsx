@@ -1,7 +1,8 @@
 import React from "react";
 import Loading from "./Loading.jsx";
+import LocationInfo from "./map/LocationInfo.jsx";
 import Mainmap from "./map/Mainmap.jsx";
-import RegionInfo from "./map/RegionInfo.jsx";
+import PriceResult from "./map/PriceResult.jsx";
 import RegionSelector from "./userinput/RegionSelector.jsx";
 
 export default class App extends React.Component {
@@ -22,10 +23,11 @@ export default class App extends React.Component {
             <div id = "map_wrapper">
                 <Mainmap/>
                 <RegionSelector></RegionSelector>
-                <RegionInfo></RegionInfo>
+                <LocationInfo></LocationInfo>
             </div>
 
             <Loading></Loading>
+            <PriceResult></PriceResult>
 
         </div>
     }

@@ -35,7 +35,7 @@
     flex-direction: row;
 }
 
-#RegionInfo{
+#LocationName{
     position: absolute;
     
     box-sizing: border-box;
@@ -100,6 +100,18 @@
     transition: .3s
 }
 
+.height_500px{
+    height : 500px;
+
+    transition: .3s;
+}
+
+.height_0px{
+    height : 0;
+
+    transition : .3s;
+}
+
 #LoadingWindow{
     position: absolute;
     
@@ -111,4 +123,16 @@
     height : 30px;
 
     background-color: #e3e3e3;
+}
+
+#PriceResult {
+    position: absolute;
+    box-sizing: border-box;
+
+    top: 30%;
+
+    width : 100%;
+
+    background-color: #e3e3e3;
+    border: 3px solid #676767;
 }
