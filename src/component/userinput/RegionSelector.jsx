@@ -44,7 +44,7 @@ export default class RegionSelector extends React.Component{
     }
 
     componentWillUnmount(){
-        EventBus.on("RegionClick");
+        EventBus.remove("RegionClick");
         EventBus.remove("NonRegionClick");
     }
 
@@ -78,22 +78,24 @@ export default class RegionSelector extends React.Component{
 
         let result = newQuery.url + newQuery.getResult();
 
-        console.log(result);
-
         fetch(result)
         .then(response => 
             response.json()
         )
         .then(data => {
-
             console.log(data);
+
             this.setState({
                 resultdata : data
             })
+
+            EventBus.dispatch("LoadComplete", {});
         })
 
-        
-    }
+        //Fold
+        EventBus.dispatch("NonRegionClick", {});
+        EventBus.dispatch("Loading", {});
+    } 
 
     render(){
         return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>

@@ -1,4 +1,5 @@
 import React from "react";
+import Loading from "./Loading.jsx";
 import Mainmap from "./map/Mainmap.jsx";
 import RegionInfo from "./map/RegionInfo.jsx";
 import RegionSelector from "./userinput/RegionSelector.jsx";
@@ -23,6 +24,9 @@ export default class App extends React.Component {
                 <RegionSelector></RegionSelector>
                 <RegionInfo></RegionInfo>
             </div>
+
+            <Loading></Loading>
+
         </div>
     }
 }
