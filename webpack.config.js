@@ -25,10 +25,16 @@ export default {
       },
       {
         test: /\.(png|svg|jpg)$/,
-        use: [
-            'file-loader',
-        ],
-    },
+        use: {
+          loader : 'file-loader',
+        },
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use : {
+          loader: 'url-loader',
+        }
+      },
     {
       test: /\.css$/i,
       use: ["style-loader", "css-loader"],
