@@ -143,8 +143,8 @@ export default class Mainmap extends React.Component {
       }
 
     render(){
-        return <div>
-            <ReactSVG
+        return <div id = "SvgWrapper">
+            <ReactSVG id = "SvgMap"
                 beforeInjection = {(svg) => {
                     this.svg = svg;
                     svg.setAttribute('width', window.innerWidth);

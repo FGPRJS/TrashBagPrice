@@ -5,7 +5,7 @@
     position: absolute;
 }
 
-#super_wrapper {
+#SuperWrapper {
     width : 100%;
     height: 100%;
 
@@ -15,22 +15,35 @@
 .region {
     position:relative;
 
-    fill:blueviolet;
+    fill:#676767;
   
     transition-duration: .2s;
-  
-    z-index: 0;
 }
 
 .region :hover{
-    fill:crimson;
+    fill:#3e3e3e;
   
     transition-duration: .2s;
-  
-    z-index: 1;
+}
+
+#SvgWrapper{
+    background-image: url(https://www.freelancerstuff.com/images/thumbs/pattern_001.jpg);
+    animation: animatedBackground 10s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes animatedBackground {
+    from {
+      background-size:auto;
+      background-position: 600px 0;
+    }
+    to {
+      background-size: auto;
+      background-position: 0 600px;
+    }
   }
 
-#map_wrapper {
+#MapWrapper {
     display: flex;
     flex-direction: row;
 }
