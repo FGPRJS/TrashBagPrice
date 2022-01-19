@@ -34,16 +34,38 @@ export default class PriceResult extends React.Component{
     }
 
     render(){
+        const childrenList = [];
+
+        let tempkey = 9999;
+        
+        this.state.data.map((item, index) => {
+            const children = [];
+
+            tempkey += 1;
+
+            let id = "";
+
+            for(const property in item){
+                if(PriceProperty.hasOwnProperty(property) && item[property] != "0"){
+                    children.push(<PriceDetails key = {tempkey.toString() + "_" + index.toString()} name = {PriceProperty[property]} value = {item[property]}></PriceDetails>)
+                }
+            }
+
+            const wrapper = <div key = {tempkey} className="baseflex">
+                {
+                    children
+                }
+            </div>
+
+            childrenList.push(wrapper);
+        });
+
+        console.log(childrenList);
+
         return <div id = "PriceResult" className={this.state.styleName}>
             <div>
             {
-                this.state.data.map((item, index) => {
-                    for(const property in item){
-                        if(PriceProperty.hasOwnProperty(property) && item[property] != "0"){
-                            return <PriceDetails key = {index} name = {PriceProperty[property]} value = {item[property]}></PriceDetails>
-                        }
-                    }
-                })
+                childrenList
             }
             </div>
         </div>

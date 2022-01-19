@@ -28,8 +28,8 @@
 
 #SvgWrapper{
     background-image: url(https://www.freelancerstuff.com/images/thumbs/pattern_001.jpg);
-    animation: animatedBackground 10s infinite;
-    animation-timing-function: linear;
+    /* animation: animatedBackground 10s infinite;
+    animation-timing-function: linear; */
 }
 
 @keyframes animatedBackground {
@@ -125,6 +125,11 @@
     transition : .3s;
 }
 
+.full {
+    width : 100%;
+    height : 100%;
+}
+
 #LoadingWindow{
     position: absolute;
     
@@ -148,6 +153,10 @@
 
     background-color: #e3e3e3;
     border: 3px solid #676767;
+}
+
+.baseflex{
+    display: flex;
 }
 
 .size_50_50 {

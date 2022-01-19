@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
-import map from '../../../resource/kr.svg';
+import map from '../../../resource/kr.svg'
 import EventBus from "../../event/EventBus";
 import LocationName from "../../entity/LocationName";
 
