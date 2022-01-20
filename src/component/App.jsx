@@ -1,6 +1,6 @@
 import React from "react";
 import Loading from "./Loading.jsx";
-import LocationInfo from "./map/LocationInfo.jsx";
+import LocationInfo from "./information/LocationInfo.jsx"
 import Mainmap from "./map/Mainmap.jsx";
 import PriceResult from "./map/PriceResult.jsx";
 import RegionSelector from "./userinput/RegionSelector.jsx";
