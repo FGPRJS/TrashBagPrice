@@ -2,6 +2,8 @@ import React from "react";
 import EventBus from "../../event/EventBus";
 import PriceDetails from "../information/PriceDetails.jsx";
 import PriceProperty from "../../entity/PriceProperty.js";
+import TrashProperty from "../../entity/TrashProperty.js";
+
 
 export default class PriceResult extends React.Component{
     constructor(props){
@@ -35,23 +37,29 @@ export default class PriceResult extends React.Component{
 
     render(){
         const childrenList = [];
-
-        let tempkey = 9999;
         
         this.state.data.map((item, index) => {
             const children = [];
 
-            tempkey += 1;
+            let key = "";
 
-            let id = "";
+            for(const property in TrashProperty){
+                key += item[property];
+                key += "_";
+            }
 
-            for(const property in item){
-                if(PriceProperty.hasOwnProperty(property) && item[property] != "0"){
-                    children.push(<PriceDetails key = {tempkey.toString() + "_" + index.toString()} name = {PriceProperty[property]} value = {item[property]}></PriceDetails>)
+            for(const property in PriceProperty){
+                if(item[property] != "0"){
+                    children.push(
+                    <PriceDetails 
+                        key = {property + "_" + key}
+                        name = {PriceProperty[property]} 
+                        value = {item[property]}>
+                    </PriceDetails>)
                 }
             }
 
-            const wrapper = <div key = {tempkey} className="baseflex">
+            const wrapper = <div key = {key} className="baseflex">
                 {
                     children
                 }
