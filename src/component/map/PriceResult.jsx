@@ -53,7 +53,7 @@ export default class PriceResult extends React.Component{
                     children.push(
                     <PriceDetails 
                         key = {property + "_" + key}
-                        name = {PriceProperty[property]} 
+                        src = {PriceProperty[property]} 
                         value = {item[property]}>
                     </PriceDetails>)
                 }
