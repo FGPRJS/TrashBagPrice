@@ -54,7 +54,7 @@ export default class PriceResult extends React.Component{
                         <TypeDetails
                             key = {property}
                             src = {TrashType[item[property]]}
-                            value = {item[property]}
+                            title ={item[property]}
                         ></TypeDetails>
                     )
                 }

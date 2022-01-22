@@ -7,7 +7,7 @@ export default class TypeDetails extends React.Component{
 
     render(){
         return <div>
-            <img className = "size_50_50" src = {this.props.src} alt={"NO IMAGE"} />
+            <img className = "size_50_50" src = {this.props.src} alt={"NO IMAGE"} title = {this.props.title} />
         </div>
     }
 }
