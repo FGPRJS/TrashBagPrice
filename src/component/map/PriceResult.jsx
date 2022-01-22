@@ -5,6 +5,7 @@ import PriceProperty from "../../entity/PriceProperty.js";
 import TrashProperty from "../../entity/TrashProperty.js";
 import TypeDetails from "../information/TypeDetails.jsx";
 import TrashType from "../../entity/TrashType.js";
+import Label from "../../entity/Label.jsx";
 
 
 export default class PriceResult extends React.Component{
@@ -41,8 +42,8 @@ export default class PriceResult extends React.Component{
         const childrenList = [];
         
         this.state.data.map((item, index) => {
-            const children = [];
-            const typechildren = [];
+            const children = [Label["PriceLabel"]];
+            const typechildren = [Label["TagLabel"]];
 
             let key = "";
 
