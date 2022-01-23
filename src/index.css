@@ -173,3 +173,13 @@
     width : 10px;
     height : 50px;
 }
+
+.fontBlackHanSans {
+    font-family: 'Black Han Sans', sans-serif;
+    color: #676767;
+}
+
+.fontNanumGothic {
+    font-family: 'Nanum Gothic', sans-serif;
+    color : #676767;
+}
