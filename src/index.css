@@ -118,21 +118,20 @@
     transition: .3s
 }
 
-.height_500px{
-    height : 500px;
-
-    transition: .3s;
-}
-
-.height_0px{
-    height : 0;
-
-    transition : .3s;
-}
-
 .full {
     width : 100%;
     height : 100%;
+}
+
+.toFitContent{
+    height : fit-content;
+
+    transition: .3s;
+}
+.toHeight0{
+    height : 0;
+
+    transition: .3s;
 }
 
 #LoadingWindow{
@@ -151,9 +150,9 @@
 #PriceResult {
     position: absolute;
     box-sizing: border-box;
+    
 
-    top: 30%;
-
+    bottom: 0%;
     width : 100%;
 
     background-color: #e3e3e3;
@@ -164,22 +163,22 @@
     display: flex;
 }
 
-.size_50_50 {
-    width : 50px;
-    height: 50px;
+.size_80_80 {
+    width : 80px;
+    height: 80px;
 }
 
-.size_10_50{
+.size_20_80{
     width : 10px;
-    height : 50px;
+    height : 80px;
 }
 
 .fontBlackHanSans {
     font-family: 'Black Han Sans', sans-serif;
-    color: #676767;
+    color: #AAA9A9;
 }
 
 .fontNanumGothic {
     font-family: 'Nanum Gothic', sans-serif;
-    color : #676767;
+    color : #AAA9A9;
 }

@@ -7,7 +7,7 @@ export default class PriceDetails extends React.Component{
 
     render(){
         return <div>
-            <img className = "size_50_50" src = {this.props.src} alt="NO IMAGE" />
+            <img className = "size_80_80" src = {this.props.src} alt="NO IMAGE" />
             <div className="fontBlackHanSans">{this.props.value + " 원"}</div>
         </div>
     }

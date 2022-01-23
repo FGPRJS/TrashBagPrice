@@ -20,14 +20,14 @@ export default class PriceResult extends React.Component{
 
     showResultData(event){
         this.setState({
-            styleName : 'toVisible height_500px',
+            styleName : 'toVisible toFitContent',
             data : event.result.response.body.items
-        },() => {console.log(this.state.data)});
+        }, () => {console.log(this.state.data)});
     }
 
     closeWindow(event){
         this.setState({
-            styleName : 'toTransparent height_0px',
+            styleName : 'toTransparent toHeight0',
             data : []
         });
     }
@@ -39,11 +39,16 @@ export default class PriceResult extends React.Component{
     }
 
     render(){
+        let locationname = ""
         const childrenList = [];
         
         this.state.data.map((item, index) => {
             const children = [Label["PriceLabel"]];
             const typechildren = [Label["TagLabel"]];
+
+            //Make locationName
+            locationname = item["ctprvnNm"] + " " + item["signguNm"];
+
 
             let key = "";
 
@@ -90,9 +95,8 @@ export default class PriceResult extends React.Component{
             childrenList.push(wrapper);
         });
 
-        console.log(childrenList);
-
         return <div id = "PriceResult" className={this.state.styleName}>
+            <div>{locationname}</div>
             <div>
             {
                 childrenList
