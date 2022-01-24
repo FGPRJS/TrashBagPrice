@@ -39,8 +39,8 @@ export default class LocationInfo extends React.Component{
     }
 
     render(){
-        return <div id="LocationName" className={this.state.styleName + " " + "fontNanumGothic"}>
-            <span>{this.state.locationtext}</span>
+        return <div id="LocationName" className={this.state.styleName + " " + "marginCenter"}>
+            <div className="fontSize32px textCenter fontBlackHanSans fontColorBlack">{this.state.locationtext}</div>
         </div>
     }
 }

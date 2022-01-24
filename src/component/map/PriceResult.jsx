@@ -13,7 +13,7 @@ export default class PriceResult extends React.Component{
         super(props);
     
         this.state = {
-            styleName : 'toTransparent height_0px',
+            styleName : 'toTransparent toHeight0',
             data : []
         }
     }
@@ -96,7 +96,7 @@ export default class PriceResult extends React.Component{
         });
 
         return <div id = "PriceResult" className={this.state.styleName}>
-            <div>{locationname}</div>
+            <div className="fontBlackHanSans fontSize24px fontColorLight">{locationname}</div>
             <div>
             {
                 childrenList

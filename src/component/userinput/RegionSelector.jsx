@@ -93,14 +93,16 @@ export default class RegionSelector extends React.Component{
 
     render(){
         return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
-            <div className="fontNanumGothic">{this.state.locationName}</div>
-            <select id="RegionSelection">
+            <div className="fontNanumGothic fontSize32px textCenter">{this.state.locationName}</div>
+            <div className = "fontNanumGothic">시/군/구</div>
+            <select id="RegionSelection" className="width100per">
             {
                 this.state.regions.map((item, index) => {
                     return <option key = {index} >{item}</option>
                 })
             }
             </select>
+            <div className = "fontNanumGothic">쓰레기 종류</div>
             <div id = "trashprposwrapper">
                 <input type="radio" id = "trashtypeChoice1"
                 name="trashprpos" value="생활쓰레기"/>
@@ -114,7 +116,7 @@ export default class RegionSelector extends React.Component{
                 name="trashprpos" value=""/>
                 <label className = "fontNanumGothic" htmlFor="trashtypeChoice3">모두</label>
             </div>
-            <button onClick={this.searchClick.bind(this)}>search</button>
+            <button className="width100per" onClick={this.searchClick.bind(this)}>search</button>
         </div>
     }
 }
