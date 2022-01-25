@@ -2,7 +2,8 @@
   "type": "module",
   "scripts": {
     "dev": "webpack serve",
-    "build": "webpack build"
+    "build": "webpack build",
+    "start" : "webpack build"
   },
   "dependencies": {
     "css-loader": "^6.5.1",
