@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const { httpGet } = require('./httpGet.cjs');
-const { listenerCount } = require('process');
 
 let app = express();
 
@@ -19,7 +18,9 @@ const url = "http://api.data.go.kr/openapi/tn_pubr_public_weighted_envlp_api"; /
 app.use(express.static(path.join(__dirname, '../dist')));
 app.set('port', process.env.PORT || port);
 
-app.listen(port);
+app.listen(process.env.PORT || port, () => {
+  console.log("Express server listening");
+});
 
 app.get('/', (req, res) => {
   console.log("hello world!");
