@@ -1,12 +1,15 @@
 export default class AppQueryMaker {
     constructor(){
-        this.resultQuery = 
-        '?' + 
-        encodeURIComponent('serviceKey') + 
-        '='+
-        'WcEDPByqQrzxWt2k69nksx8Junf7GtDc8n8vGVgDz6hvbT8nvwZk4x1yYztNED3DD%2FD8%2BtiTcsKmkAUXUox%2BeQ%3D%3D'; /*Service Key*/
+        // this.resultQuery = 
+        // '?' + 
+        // encodeURIComponent('serviceKey') + 
+        // '='+
+        // 'WcEDPByqQrzxWt2k69nksx8Junf7GtDc8n8vGVgDz6hvbT8nvwZk4x1yYztNED3DD%2FD8%2BtiTcsKmkAUXUox%2BeQ%3D%3D'; /*Service Key*/
     
-        this.url = 'http://api.data.go.kr/openapi/tn_pubr_public_weighted_envlp_api'; /*URL*/
+        // this.url = 'http://api.data.go.kr/openapi/tn_pubr_public_weighted_envlp_api'; /*URL*/
+
+        this.resultQuery = "/request/?";
+        this.url = '';
     }
 
     static makeBaseQuery(){

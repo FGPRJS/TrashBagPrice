@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "webpack serve",
     "build": "webpack --mode production",
-    "start": "node server.cjs"
+    "start": "node ./server/server.cjs"
   },
   "dependencies": {
     "css-loader": "^6.5.1",

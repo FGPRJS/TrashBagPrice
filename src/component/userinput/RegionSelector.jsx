@@ -74,6 +74,7 @@ export default class RegionSelector extends React.Component{
         }
 
         let result = newQuery.url + newQuery.getResult();
+        console.log(result);
 
         fetch(result)
         .then(response => 
