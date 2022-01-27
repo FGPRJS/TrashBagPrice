@@ -58,7 +58,7 @@ export default class RegionSelector extends React.Component{
         let region = selectElement.options[selectElement.selectedIndex].value;
 
         newQuery.appendConditionQuery('SIGNGU_NM',region);
-
+        
         //Trashprpos Selector
 
         const radioButtons = document.querySelectorAll('input[name="trashprpos"]');
@@ -74,15 +74,12 @@ export default class RegionSelector extends React.Component{
         }
 
         let result = newQuery.url + newQuery.getResult();
-        console.log(result);
 
         fetch(result)
         .then(response => 
             response.json()
         )
         .then(data => {
-            console.log(data);
-
             EventBus.dispatch("LoadComplete", {});
             EventBus.dispatch("ShowResultData", {result : data});
         })
