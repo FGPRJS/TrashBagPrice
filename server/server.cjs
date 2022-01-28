@@ -20,10 +20,6 @@ app.listen(app.get('port'), () => {
   console.log("Express server listening");
 });
 
-app.get('/', (req, res) => {
-  console.log("hello world!");
-});
-
 app.get('/request', (req, res) => {
 
   let pageNo = req.query.pageNo;
@@ -40,8 +36,6 @@ app.get('/request', (req, res) => {
   + "&SIGNGU_NM=" + SIGNGU_NM
 
   const result = url + resultQuery;
-
-  console.log(result);
 
   httpGet(result).then((response) => {
     res.send(response);
