@@ -1,11 +1,12 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "webpack serve",
-    "build": "webpack --mode production",
-    "start": "node ./server/server.cjs"
+    "dev": "NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=build webpack --mode production",
+    "start": "NODE_ENV=start node ./server/server.cjs"
   },
   "dependencies": {
+    "@rails/webpacker": "^5.4.3",
     "css-loader": "^6.5.1",
     "express": "^4.17.2",
     "react": "^17.0.2",
@@ -17,6 +18,8 @@
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-react": "^7.16.5",
+    "@webpack-cli/info": "^1.4.1",
+    "@webpack-cli/serve": "^1.6.1",
     "babel-loader": "^8.2.3",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",

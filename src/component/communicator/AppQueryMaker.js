@@ -1,8 +1,7 @@
 export default class AppQueryMaker {
     constructor(){
-        const isDevServer = process.env.WEBPACK_DEV_SERVER;
 
-        if(isDevServer){
+        if(process.env.NODE_ENV.includes('dev')){
             this.resultQuery = 
             '?' + 
             encodeURIComponent('serviceKey') + 
@@ -15,7 +14,6 @@ export default class AppQueryMaker {
             this.resultQuery = "/request/?";
             this.url = '';
         }
-        
     }
 
     static makeBaseQuery(){
