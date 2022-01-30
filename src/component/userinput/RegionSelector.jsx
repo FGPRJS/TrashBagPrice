@@ -4,12 +4,18 @@ import EventBus from "../../event/EventBus";
 import AppQueryMaker from "../communicator/AppQueryMaker";
 
 export default class RegionSelector extends React.Component{
-    
+
     constructor(props){
         super(props);
 
         this.state = {
-            styleName : 'left_n300px',
+            style : {
+                RegionSelectorWrapper : {
+                    width : window.innerWidth / 3,
+                    left : -window.innerWidth / 3,
+                    transition: '.3s'
+                }
+            },
             locationName : "",
             regions : []
         }
@@ -17,7 +23,13 @@ export default class RegionSelector extends React.Component{
 
     RegionClicked(event){
         this.setState({
-            styleName : 'left_0px',
+            style : {
+                RegionSelectorWrapper : {
+                    width : window.innerWidth / 3,
+                    left: 0,
+                    transition: '.3s'
+                }
+            },
             locationName : event.target,
             regions : RegionName[event.target]
         })
@@ -29,7 +41,13 @@ export default class RegionSelector extends React.Component{
 
     NonRegionClicked(event){       
         this.setState({
-            styleName : 'left_n300px',
+            style : {
+                RegionSelectorWrapper : {
+                    width : window.innerWidth / 3,
+                    left : -window.innerWidth / 3,
+                    transition: '.3s'
+                }
+            },
             locationName : "",
             regions : []
         })
@@ -75,6 +93,8 @@ export default class RegionSelector extends React.Component{
 
         let result = newQuery.url + newQuery.getResult();
 
+        console.log(result);
+
         fetch(result)
         .then(response => 
             response.json()
@@ -90,7 +110,10 @@ export default class RegionSelector extends React.Component{
     } 
 
     render(){
-        return <div id= 'RegionSelectorWrapper' className = {this.state.styleName}>
+
+        
+
+        return <div id= 'RegionSelectorWrapper' className = {this.state.styleName} style={this.state.style.RegionSelectorWrapper}>
             <div className="fontNanumGothic fontSize32px textCenter">{this.state.locationName}</div>
             <div className = "fontNanumGothic">시/군/구</div>
             <select id="RegionSelection" className="width100per">
