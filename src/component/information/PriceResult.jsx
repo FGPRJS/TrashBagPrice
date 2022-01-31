@@ -1,9 +1,9 @@
 import React from "react";
 import EventBus from "../../event/EventBus";
-import PriceDetails from "../information/PriceDetails.jsx";
+import PriceDetails from "./PriceDetails.jsx";
 import PriceProperty from "../../entity/PriceProperty.js";
 import TrashProperty from "../../entity/TrashProperty.js";
-import TypeDetails from "../information/TypeDetails.jsx";
+import TypeDetails from "./TypeDetails.jsx";
 import TrashType from "../../entity/TrashType.js";
 import Label from "../../entity/Label.jsx";
 
@@ -13,21 +13,30 @@ export default class PriceResult extends React.Component{
         super(props);
     
         this.state = {
-            styleName : 'toTransparent toHeight0',
+            style : {
+                height : window.innerHeight / 2,
+            },
+            className : 'toTransparent',
             data : []
         }
     }
 
     showResultData(event){
         this.setState({
-            styleName : 'toVisible toFitContent',
+            style : {
+                height : window.innerHeight / 2,
+            },
+            className : 'toVisible',
             data : event.result.response.body.items
-        }, () => {console.log(this.state.data)});
+        });
     }
 
     closeWindow(event){
         this.setState({
-            styleName : 'toTransparent toHeight0',
+            style : {
+                height : window.innerHeight / 2,
+            },
+            className : 'toTransparent',
             data : []
         });
     }
@@ -77,7 +86,7 @@ export default class PriceResult extends React.Component{
                 }
             }
 
-            const wrapper = <div key = {key}>
+            const wrapper = <div key = {key} >
                 <div className = "baseBox">
                     <div className = "baseflex">
                     {
@@ -95,9 +104,9 @@ export default class PriceResult extends React.Component{
             childrenList.push(wrapper);
         });
 
-        return <div id = "PriceResult" className={this.state.styleName}>
+        return <div id = "PriceResult" className={this.state.className}>
             <div className="fontBlackHanSans fontSize24px fontColorLight">{locationname}</div>
-            <div>
+            <div style = {this.state.style}>
             {
                 childrenList
             }

@@ -2,8 +2,9 @@ import React from "react";
 import Loading from "./Loading.jsx";
 import LocationInfo from "./information/LocationInfo.jsx"
 import Mainmap from "./map/Mainmap.jsx";
-import PriceResult from "./map/PriceResult.jsx";
+
 import RegionSelector from "./userinput/RegionSelector.jsx";
+import PriceResult from "./information/PriceResult.jsx";
 
 export default class App extends React.Component {
 
