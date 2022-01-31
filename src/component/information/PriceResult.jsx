@@ -14,7 +14,7 @@ export default class PriceResult extends React.Component{
     
         this.state = {
             style : {
-                height : window.innerHeight / 2,
+                height : 0,
             },
             className : 'toTransparent',
             data : []
@@ -34,7 +34,7 @@ export default class PriceResult extends React.Component{
     closeWindow(event){
         this.setState({
             style : {
-                height : window.innerHeight / 2,
+                height : 0,
             },
             className : 'toTransparent',
             data : []

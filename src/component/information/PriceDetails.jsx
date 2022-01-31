@@ -8,6 +8,9 @@ export default class PriceDetails extends React.Component{
             style : {
                 width : window.innerWidth / 10,
                 height : window.innerWidth / 10
+            },
+            fontStyle : {
+                fontSize : window.innerWidth / 40,
             }
         }
     }
@@ -15,7 +18,7 @@ export default class PriceDetails extends React.Component{
     render(){
         return <div className="">
             <img style = {this.state.style} src = {this.props.src} alt="NO IMAGE" />
-            <div className="fontBlackHanSans fontSize24px fontColorLight textCenter marginCenter">{this.props.value + " 원"}</div>
+            <div className="fontBlackHanSans fontColorLight textCenter marginCenter" style={this.state.fontStyle}>{this.props.value + " 원"}</div>
         </div>
     }
 }

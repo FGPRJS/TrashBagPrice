@@ -8,7 +8,7 @@ export default class TypeDetails extends React.Component{
             style : {
                 width : window.innerWidth / 10,
                 height : window.innerWidth / 10
-            }
+            },
         }
     }
 
