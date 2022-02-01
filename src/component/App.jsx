@@ -29,7 +29,7 @@ export default class App extends React.Component {
 
             <Loading></Loading>
             <PriceResult></PriceResult>
-
+            
         </div>
     }
 }
