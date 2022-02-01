@@ -7,7 +7,8 @@ export default class PriceDetails extends React.Component{
         this.state = {
             style : {
                 width : window.innerWidth / 10,
-                height : window.innerWidth / 10
+                height : window.innerWidth / 10,
+                transition : 0.3
             },
             fontStyle : {
                 fontSize : window.innerWidth / 40,

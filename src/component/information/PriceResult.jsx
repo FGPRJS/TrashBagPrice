@@ -15,6 +15,7 @@ export default class PriceResult extends React.Component{
         this.state = {
             style : {
                 height : 0,
+                transition : "0.3s"
             },
             className : 'toTransparent',
             data : []
@@ -25,6 +26,7 @@ export default class PriceResult extends React.Component{
         this.setState({
             style : {
                 height : window.innerHeight / 2,
+                transition : "0.3s"
             },
             className : 'toVisible',
             data : event.result.response.body.items
@@ -35,6 +37,7 @@ export default class PriceResult extends React.Component{
         this.setState({
             style : {
                 height : 0,
+                transition : "0.3s"
             },
             className : 'toTransparent',
             data : []
