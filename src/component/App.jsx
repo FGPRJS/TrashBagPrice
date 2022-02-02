@@ -6,30 +6,18 @@ import Mainmap from "./map/Mainmap.jsx";
 import RegionSelector from "./userinput/RegionSelector.jsx";
 import PriceResult from "./information/PriceResult.jsx";
 
-export default class App extends React.Component {
 
-    constructor(props){
-        super(props);
-    }
+export default function(props){
 
-    componentDidMount() {
-        
-    }
-    componentWillUnmount() {
-        
-    }
-
-    render(){
-        return <div id = "SuperWrapper">
-            <div id = "MapWrapper">
-                <Mainmap/>
-                <RegionSelector></RegionSelector>
-                <LocationInfo></LocationInfo>
-            </div>
-
-            <Loading></Loading>
-            <PriceResult></PriceResult>
-            
+    return <div id = "SuperWrapper">
+        <div id = "MapWrapper">
+            <Mainmap/>
+            <RegionSelector></RegionSelector>
+            <LocationInfo></LocationInfo>
         </div>
-    }
+
+        <Loading></Loading>
+        <PriceResult></PriceResult>
+        
+    </div>;
 }
