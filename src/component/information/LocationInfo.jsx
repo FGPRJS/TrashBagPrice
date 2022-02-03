@@ -1,46 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react/cjs/react.development";
 import EventBus from "../../event/EventBus";
 
-export default class LocationInfo extends React.Component{
+export default function(props){
+    const [locationText, setLocationText] = useState("");
+    const [styleName, setStyleName] = useState("toTransparent");
 
-    constructor(props){
-        super(props);
+    useEffect(() => {
+        EventBus.on('ElementHover',(event)=>{
+            setLocationText(event.target);
+            setStyleName("toVisible");
+        });
+        EventBus.on('ElementLeave',(event)=>{
+            setLocationText("");
+            setStyleName("toTransparent");
+        });
+    })
 
-        this.state = {
-            locationtext : "",
-            styleName : "toTransparent"
-        };
-    }
-
-    onHover(event){
-        let locationname = event.target;
-
-        this.setState({
-            locationtext : locationname,
-            styleName : "toVisible"
-        })
-    }
-
-    onLeave(event){
-        this.setState({
-            locationtext : "",
-            styleName : "toTransparent"
-        })
-    }
-
-    componentDidMount(){
-        EventBus.on('ElementHover',this.onHover.bind(this));
-        EventBus.on('ElementLeave',this.onLeave.bind(this));
-    }
-
-    componentWillUnmount(){
-        EventBus.remove('ElementHover');
-        EventBus.remove('ElementLeave');
-    }
-
-    render(){
-        return <div id="LocationName" className={this.state.styleName + " " + "marginCenter"}>
-            <div className="fontSize32px textCenter fontBlackHanSans fontColorBlack">{this.state.locationtext}</div>
+    return <div id="LocationName" className={styleName + " " + "marginCenter"}>
+            <div className="fontSize32px textCenter fontBlackHanSans fontColorBlack">{locationText}</div>
         </div>
-    }
 }

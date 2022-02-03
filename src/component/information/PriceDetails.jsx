@@ -1,25 +1,17 @@
 import React from "react";
+import { useState } from "react/cjs/react.development";
 
-export default class PriceDetails extends React.Component{
-    constructor(props){
-        super(props);
+export default function(props){
+    const [style, setStyle] = useState({
+        width : window.innerWidth / 10,
+        height : window.innerWidth / 10,
+    });
+    const [fontStyle, setFontStyle] = useState({
+        fontSize : window.innerWidth / 40,
+    })
 
-        this.state = {
-            style : {
-                width : window.innerWidth / 10,
-                height : window.innerWidth / 10,
-                transition : 0.3
-            },
-            fontStyle : {
-                fontSize : window.innerWidth / 40,
-            }
-        }
-    }
-
-    render(){
-        return <div className="">
-            <img style = {this.state.style} src = {this.props.src} alt="NO IMAGE" />
-            <div className="fontBlackHanSans fontColorLight textCenter marginCenter" style={this.state.fontStyle}>{this.props.value + " 원"}</div>
+    return <div className="">
+            <img style = {style} src = {props.src} alt="NO IMAGE" />
+            <div className="fontBlackHanSans fontColorLight textCenter marginCenter" style={fontStyle}>{props.value + " 원"}</div>
         </div>
-    }
 }

@@ -1,73 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RegionName from "../../entity/RegionName";
 import EventBus from "../../event/EventBus";
 import AppQueryMaker from "../communicator/AppQueryMaker";
 
-export default class RegionSelector extends React.Component{
+export default function(props){
+    const [regionSelectorWrapper, setRegionSelectorWrapper] = useState({
+        width : window.innerWidth / 3,
+        left : -window.innerWidth / 3,
+        transition: '.3s'
+    });
+    const [locationName, setLocationName] = useState("");
+    const [regions, setRegions] = useState([]);
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            style : {
-                RegionSelectorWrapper : {
-                    width : window.innerWidth / 3,
-                    left : -window.innerWidth / 3,
-                    transition: '.3s'
-                }
-            },
-            locationName : "",
-            regions : []
+    useEffect(() => {
+        EventBus.on("RegionClick", (event) => {
+            setRegionSelectorWrapper(
+            {
+                width : window.innerWidth / 3,
+                left: 0,
+                transition: '.3s'
+            });
+            setLocationName(event.target);
+            setRegions(RegionName[event.target]);
         }
-    }
-
-    RegionClicked(event){
-        this.setState({
-            style : {
-                RegionSelectorWrapper : {
-                    width : window.innerWidth / 3,
-                    left: 0,
-                    transition: '.3s'
-                }
-            },
-            locationName : event.target,
-            regions : RegionName[event.target]
-        })
-    }
-
-    temp(event){
-        
-    }
-
-    NonRegionClicked(event){       
-        this.setState({
-            style : {
-                RegionSelectorWrapper : {
+        );
+        EventBus.on("NonRegionClick", () => {
+            setRegionSelectorWrapper(
+                {
                     width : window.innerWidth / 3,
                     left : -window.innerWidth / 3,
                     transition: '.3s'
-                }
-            },
-            locationName : "",
-            regions : []
+                });
+                setLocationName("");
+                setRegions([]);
+        })
+    },[]);
+
+    return <div id= 'RegionSelectorWrapper' style={regionSelectorWrapper}>
+    <div className="fontNanumGothic fontSize32px textCenter">{locationName}</div>
+    <div className = "fontNanumGothic">시/군/구</div>
+    <select id="RegionSelection" className="width100per">
+    {
+        regions.map((item, index) => {
+            return <option key = {index} >{item}</option>
         })
     }
+    </select>
+    <div className = "fontNanumGothic">쓰레기 종류</div>
+    <div id = "trashprposwrapper">
+        <input type="radio" id = "trashtypeChoice1"
+        name="trashprpos" value="생활쓰레기"/>
+        <label className = "fontNanumGothic" htmlFor="trashtypeChoice1">생활</label>
 
-    componentDidMount(){
-        EventBus.on("RegionClick", this.RegionClicked.bind(this));
-        EventBus.on("NonRegionClick", this.NonRegionClicked.bind(this));
-    }
+        <input type="radio" id = "trashtypeChoice2"
+        name="trashprpos" value="음식물쓰레기"/>
+        <label className = "fontNanumGothic" htmlFor="trashtypeChoice2">음식물</label>
 
-    componentWillUnmount(){
-        EventBus.remove("RegionClick");
-        EventBus.remove("NonRegionClick");
-    }
-
-
-    searchClick(event){
+        <input type="radio" id = "trashtypeChoice3" defaultChecked={true}
+        name="trashprpos" value=""/>
+        <label className = "fontNanumGothic" htmlFor="trashtypeChoice3">모두</label>
+    </div>
+    <button className="width100per" onClick={(event)=>{
         let newQuery = AppQueryMaker.makeBaseQuery();
 
-        newQuery.appendConditionQuery('CTPRVN_NM',this.state.locationName);
+        newQuery.appendConditionQuery('CTPRVN_NM',locationName);
 
         //Region Selector
 
@@ -76,7 +72,7 @@ export default class RegionSelector extends React.Component{
         let region = selectElement.options[selectElement.selectedIndex].value;
 
         newQuery.appendConditionQuery('SIGNGU_NM',region);
-        
+
         //Trashprpos Selector
 
         const radioButtons = document.querySelectorAll('input[name="trashprpos"]');
@@ -107,37 +103,7 @@ export default class RegionSelector extends React.Component{
         //Fold
         EventBus.dispatch("NonRegionClick", {});
         EventBus.dispatch("Loading", {});
-    } 
-
-    render(){
-
-        
-
-        return <div id= 'RegionSelectorWrapper' className = {this.state.styleName} style={this.state.style.RegionSelectorWrapper}>
-            <div className="fontNanumGothic fontSize32px textCenter">{this.state.locationName}</div>
-            <div className = "fontNanumGothic">시/군/구</div>
-            <select id="RegionSelection" className="width100per">
-            {
-                this.state.regions.map((item, index) => {
-                    return <option key = {index} >{item}</option>
-                })
-            }
-            </select>
-            <div className = "fontNanumGothic">쓰레기 종류</div>
-            <div id = "trashprposwrapper">
-                <input type="radio" id = "trashtypeChoice1"
-                name="trashprpos" value="생활쓰레기"/>
-                <label className = "fontNanumGothic" htmlFor="trashtypeChoice1">생활</label>
-
-                <input type="radio" id = "trashtypeChoice2"
-                name="trashprpos" value="음식물쓰레기"/>
-                <label className = "fontNanumGothic" htmlFor="trashtypeChoice2">음식물</label>
-
-                <input type="radio" id = "trashtypeChoice3" defaultChecked={true}
-                name="trashprpos" value=""/>
-                <label className = "fontNanumGothic" htmlFor="trashtypeChoice3">모두</label>
-            </div>
-            <button className="width100per" onClick={this.searchClick.bind(this)}>search</button>
-        </div>
     }
+    }>search</button>
+        </div>
 }
