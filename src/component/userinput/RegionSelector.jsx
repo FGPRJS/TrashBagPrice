@@ -37,8 +37,8 @@ export default function(props){
     },[]);
 
     return <div id= 'RegionSelectorWrapper' style={regionSelectorWrapper}>
-    <div className="fontNanumGothic fontSize32px textCenter">{locationName}</div>
-    <div className = "fontNanumGothic">시/군/구</div>
+    <div className="fontBlackHanSans textCenter" style = {{fontSize : "36px"}}>{locationName}</div>
+    <div className = "fontBlackHanSans">시/군/구</div>
     <select id="RegionSelection" className="width100per">
     {
         regions.map((item, index) => {
@@ -46,21 +46,21 @@ export default function(props){
         })
     }
     </select>
-    <div className = "fontNanumGothic">쓰레기 종류</div>
+    <div className = "fontBlackHanSans">쓰레기 종류</div>
     <div id = "trashprposwrapper">
         <input type="radio" id = "trashtypeChoice1"
         name="trashprpos" value="생활쓰레기"/>
-        <label className = "fontNanumGothic" htmlFor="trashtypeChoice1">생활</label>
+        <label className = "fontBlackHanSans" htmlFor="trashtypeChoice1">생활</label>
 
         <input type="radio" id = "trashtypeChoice2"
         name="trashprpos" value="음식물쓰레기"/>
-        <label className = "fontNanumGothic" htmlFor="trashtypeChoice2">음식물</label>
+        <label className = "fontBlackHanSans" htmlFor="trashtypeChoice2">음식물</label>
 
         <input type="radio" id = "trashtypeChoice3" defaultChecked={true}
         name="trashprpos" value=""/>
-        <label className = "fontNanumGothic" htmlFor="trashtypeChoice3">모두</label>
+        <label className = "fontBlackHanSans" htmlFor="trashtypeChoice3">모두</label>
     </div>
-    <button className="width100per" onClick={(event)=>{
+    <button className="width100per fontBlackHanSans bottom_0px" onClick={(event)=>{
         let newQuery = AppQueryMaker.makeBaseQuery();
 
         newQuery.appendConditionQuery('CTPRVN_NM',locationName);
@@ -104,6 +104,6 @@ export default function(props){
         EventBus.dispatch("NonRegionClick", {});
         EventBus.dispatch("Loading", {});
     }
-    }>search</button>
+    }>SEARCH</button>
         </div>
 }
