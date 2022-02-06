@@ -112,10 +112,6 @@
     transition: .3s;
 }
 
-.bottom_0px{
-    bottom:0px;
-}
-
 .toTransparent{
     opacity: 0;
 
