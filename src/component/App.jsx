@@ -5,6 +5,8 @@ import Mainmap from "./map/Mainmap.jsx";
 
 import RegionSelector from "./userinput/RegionSelector.jsx";
 import PriceResult from "./information/PriceResult.jsx";
+import MapController from "./map/MapController.jsx";
+import MapControllerButton from "./map/MapControllerButton.jsx";
 
 
 export default function(props){
@@ -18,6 +20,8 @@ export default function(props){
 
         <Loading></Loading>
         <PriceResult></PriceResult>
+        <MapControllerButton></MapControllerButton>
+        <MapController></MapController>
         
     </div>;
 }
