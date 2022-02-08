@@ -27,6 +27,7 @@ export default function(props){
 
         EventBus.on("RegionClick", regionout);
         EventBus.on("NonRegionClick", regionout);
+
     }, []);
     
     

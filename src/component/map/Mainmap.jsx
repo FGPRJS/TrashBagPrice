@@ -92,7 +92,6 @@ export default class Mainmap extends React.Component {
         window.addEventListener('resize', this.updateDimensions);
         EventBus.on('MapZoomIn', () => {
             this.zoom(1.1);
-            
         });
         EventBus.on('MapZoomOut', () => {
             this.zoom(0.9);
@@ -196,7 +195,6 @@ export default class Mainmap extends React.Component {
         // We apply the new viewBox values onto the SVG
         this.svg.setAttribute('viewBox', viewBoxString);
     }
-
 
     onZoom(event){
         if(event.deltaY > 0){
