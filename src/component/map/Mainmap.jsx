@@ -12,6 +12,13 @@ class ViewBox {
         this.height = height;
     }
 
+    copy(otherViewBox){
+        this.x = otherViewBox.x;
+        this.y = otherViewBox.y;
+        this.width = otherViewBox.width;
+        this.height = otherViewBox.height;
+    }
+
     getString(){
         return [this.x, this.y, this.width, this.height].join(' ')
     }
@@ -83,6 +90,33 @@ export default class Mainmap extends React.Component {
     };
     componentDidMount() {
         window.addEventListener('resize', this.updateDimensions);
+        EventBus.on('MapZoomIn', () => {
+            this.zoom(1.1);
+            
+        });
+        EventBus.on('MapZoomOut', () => {
+            this.zoom(0.9);
+        });
+        EventBus.on('MapGoLeft', () => {
+            this.current_viewbox.x += 50;
+            this.new_viewbox.x = this.current_viewbox.x;
+            this.applyViewBox();
+        });
+        EventBus.on('MapGoRight', () => {
+            this.current_viewbox.x -= 50;
+            this.new_viewbox.x = this.current_viewbox.x;
+            this.applyViewBox();
+        });
+        EventBus.on('MapGoUp', () => {
+            this.current_viewbox.y += 50;
+            this.new_viewbox.y = this.current_viewbox.y;
+            this.applyViewBox();
+        });
+        EventBus.on('MapGoDown', () => {
+            this.current_viewbox.y -= 50;
+            this.new_viewbox.y = this.current_viewbox.y;
+            this.applyViewBox();
+        });
     }
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions);
@@ -152,73 +186,49 @@ export default class Mainmap extends React.Component {
         this.new_viewbox.x = this.current_viewbox.x - (pointerPosition.x - this.pointerOrigin.x);
         this.new_viewbox.y = this.current_viewbox.y - (pointerPosition.y - this.pointerOrigin.y);
 
+        this.applyViewBox();
+    }
+
+    applyViewBox(){
         // We create a string with the new viewBox values
         // The X & Y values are equal to the current viewBox minus the calculated distances
-        var viewBoxString = `${this.new_viewbox.x} ${this.new_viewbox.y} ${this.current_viewbox.width} ${this.current_viewbox.height}`;
+        var viewBoxString = `${this.new_viewbox.x} ${this.new_viewbox.y} ${this.new_viewbox.width} ${this.new_viewbox.height}`;
         // We apply the new viewBox values onto the SVG
         this.svg.setAttribute('viewBox', viewBoxString);
     }
 
-    onZoom(event){
 
+    onZoom(event){
         if(event.deltaY > 0){
-          this.current_viewbox.width /= .9;
-          this.current_viewbox.height /= .9;
+          this.zoom(0.9);
         }
         else if(event.deltaY < 0){
-          this.current_viewbox.width /= 1.10;
-          this.current_viewbox.height /=1.10;
-        }
-      
-        // this.current_viewbox.x -= (this.current_viewbox.width - tempViewBoxWidth) / 2;
-        // this.current_viewbox.y -= (this.current_viewbox.height - tempViewBoxHeight) / 2; 
-      
-        var viewBoxString = `${this.current_viewbox.x} ${this.current_viewbox.y} ${this.current_viewbox.width} ${this.current_viewbox.height}`;
-        this.svg.setAttribute('viewBox', viewBoxString);
-      }
-
-      onClick(event){
-        let element = event.srcElement;  
-        if(element && element.attributes['name']){
-            let location = element.attributes['name'].nodeValue;
-
-            if(LocationName.hasOwnProperty(location)){
-                EventBus.dispatch("RegionClick", { target: LocationName[location]});
-            }
-        }
-        else{
-            EventBus.dispatch("NonRegionClick", { target: LocationName[location]});
+          this.zoom(1.1);
         }
       }
 
-      onDBClick(event){
-        if(this.current_viewbox.width != 600){
-            //this.current_viewbox.x += event.clientX;
-            //this.current_viewbox.y += event.clientY;
-            this.current_viewbox.width = 600;
-            this.current_viewbox.height = 540;
-    
-            //this.new_viewbox.x += event.clientX;
-            //this.new_viewbox.y += event.clientY;
-            this.new_viewbox.width = 600;
-            this.new_viewbox.height = 540;
-        }
-        else{
-            //this.current_viewbox.x += event.clientX;
-            //this.current_viewbox.y += event.clientY;
-            this.current_viewbox.width = 1200;
-            this.current_viewbox.height = 1080;
-    
-            //this.new_viewbox.x += event.clientX;
-            //this.new_viewbox.y += event.clientY;
-            this.new_viewbox.width = 1200;
-            this.new_viewbox.height = 1080;
-        }
-        
+    zoom(div){
+        this.new_viewbox.width /= div;
+        this.new_viewbox.height /= div;
+        this.current_viewbox.width = this.new_viewbox.width;
+        this.current_viewbox.height = this.new_viewbox.height;
 
-        var viewBoxString = `${this.current_viewbox.x} ${this.current_viewbox.y} ${this.current_viewbox.width} ${this.current_viewbox.height}`;
-        this.svg.setAttribute('viewBox', viewBoxString);
-      }
+        this.applyViewBox();
+    }
+
+    onClick(event){
+    let element = event.srcElement;  
+    if(element && element.attributes['name']){
+        let location = element.attributes['name'].nodeValue;
+
+        if(LocationName.hasOwnProperty(location)){
+            EventBus.dispatch("RegionClick", { target: LocationName[location]});
+        }
+    }
+    else{
+        EventBus.dispatch("NonRegionClick", { target: LocationName[location]});
+    }
+    }
 
     render(){
         return <div id = "SvgWrapper">
@@ -237,7 +247,6 @@ export default class Mainmap extends React.Component {
                         svg.addEventListener('pointermove', this.onPointerMove.bind(this)); // Pointer is moving
                         svg.addEventListener('wheel', this.onZoom.bind(this));
                         svg.addEventListener('click', this.onClick.bind(this));
-                        svg.addEventListener('dblclick', this.onDBClick.bind(this));
                         
                     } else {
                         console.log("evnttype : touch/mouse");
