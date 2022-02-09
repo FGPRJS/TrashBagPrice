@@ -12,6 +12,9 @@ import normal from "../../resource/TrashType/normal.svg";
 import recyclic from "../../resource/TrashType/recyclic.svg";
 import sack from "../../resource/TrashType/sack.svg";
 
+import all from "../../resource/TrashType/all.svg";
+
+
 const TrashType = {
     "소각용" : incineration,
     "매립용" : landfill,
@@ -22,7 +25,8 @@ const TrashType = {
     "사업장용" : factory,
     "규격봉투" : normal,
     "재사용규격봉투" : recyclic,
-    "특수규격마대" : sack
+    "특수규격마대" : sack,
+    "모두" : all
 }
 
 export default TrashType;

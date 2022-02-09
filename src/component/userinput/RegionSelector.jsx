@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RegionName from "../../entity/RegionName";
+import TrashType from "../../entity/TrashType";
 import EventBus from "../../event/EventBus";
 import AppQueryMaker from "../communicator/AppQueryMaker";
 
@@ -48,17 +49,32 @@ export default function(props){
     </select>
     <div className = "fontNanumGothic">쓰레기 종류</div>
     <div id = "trashprposwrapper">
-        <input type="radio" id = "trashtypeChoice1"
-        name="trashprpos" value="생활쓰레기"/>
-        <label className = "fontNanumGothic" htmlFor="trashtypeChoice1">생활</label>
+        <label>
+            <input type="radio" id = "trashtypeChoice1"
+            name="trashprpos" value="생활쓰레기"/>
+            <img src = {TrashType["생활쓰레기"]} className = "trashtype" style = {{
+            width : window.innerWidth / 20,
+            height : window.innerWidth / 20
+        }} htmlFor="trashtypeChoice1" ></img>
+        </label>
 
-        <input type="radio" id = "trashtypeChoice2"
-        name="trashprpos" value="음식물쓰레기"/>
-        <label className = "fontNanumGothic" htmlFor="trashtypeChoice2">음식물</label>
+        <label>
+            <input type="radio" id = "trashtypeChoice2"
+            name="trashprpos" value="음식물쓰레기"/>
+            <img src = {TrashType["음식물쓰레기"]} className = "trashtype" style = {{
+            width : window.innerWidth / 20,
+            height : window.innerWidth / 20
+        }} htmlFor="trashtypeChoice2" ></img>
+        </label>
 
-        <input type="radio" id = "trashtypeChoice3" defaultChecked={true}
-        name="trashprpos" value=""/>
-        <label className = "fontNanumGothic" htmlFor="trashtypeChoice3">모두</label>
+        <label>
+            <input type="radio" id = "trashtypeChoice3" defaultChecked={true}
+            name="trashprpos" value=""/>
+            <img src = {TrashType["모두"]} className = "trashtype" style = {{
+            width : window.innerWidth / 20,
+            height : window.innerWidth / 20
+        }} htmlFor="trashtypeChoice3" ></img>
+        </label>
     </div>
     <button className="width100per" onClick={(event)=>{
         let newQuery = AppQueryMaker.makeBaseQuery();
