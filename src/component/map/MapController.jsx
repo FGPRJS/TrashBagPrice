@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import EventBus from "../../event/EventBus";
 
 export default function(props){
-    const [className, setClassName] = useState("toRight_n300px toTransparent");
+    const [className, setClassName] = useState("toTransparent");
     const [style, setStyle] = useState({
         width : "0px",
         height : "0px"
@@ -11,15 +11,15 @@ export default function(props){
     
     useEffect(() => {
         EventBus.on("ShowMapController", () => {
-            setClassName("toRight_100px toVisible");
+            setClassName("toVisible");
             setStyle({
-                width : "200px",
-                height : "200px"
+                width : "fit-content",
+                height : "fit-content"
             });
         })
 
         let regionout = () => {
-            setClassName("toRight_n300px toTransparent");
+            setClassName("toTransparent");
             setStyle({
                 width : "0px",
                 height : "0px"
@@ -32,31 +32,39 @@ export default function(props){
     
     
     return <div className={className + " baseBox MapController"} style = {style}>
-        <button onClick = {() => {
-            EventBus.dispatch("MapZoomIn");
-        }}>ZoomIn</button>
-        <button onClick = {() => {
-            EventBus.dispatch("MapZoomOut");
-        }}>ZoomOut</button>
-        <button onClick = {() => {
-            EventBus.dispatch("MapGoLeft");
-        }}>Left</button>
-        <button onClick = {() => {
-            EventBus.dispatch("MapGoRight");
-        }}>Right</button>
-        <button onClick = {() => {
-            EventBus.dispatch("MapGoUp");
-        }}>Up</button>
-        <button onClick = {() => {
-            EventBus.dispatch("MapGoDown");
-        }}>Down</button>
-        <button onClick={() => {
+        <span className="tipmargin fontBlackHanSans fontColorLight">MAP CONTROLLER</span>
+
+        <div className="baseflex">
+            <button className = "material-icons tipmargin" onClick = {() => {
+                EventBus.dispatch("MapZoomIn");
+            }}>zoom_in</button>
+            <button className = "material-icons tipmargin" onClick = {() => {
+                EventBus.dispatch("MapZoomOut");
+            }}>zoom_out</button>
+        </div>
+        
+        <div className="baseflex">
+            <button className = "material-icons tipmargin" onClick = {() => {
+                EventBus.dispatch("MapGoLeft");
+            }}>arrow_forward</button>
+            <button className = "material-icons tipmargin" onClick = {() => {
+                EventBus.dispatch("MapGoRight");
+            }}>arrow_back</button>
+            <button className = "material-icons tipmargin" onClick = {() => {
+                EventBus.dispatch("MapGoUp");
+            }}>arrow_downward</button>
+            <button className = "material-icons tipmargin" onClick = {() => {
+                EventBus.dispatch("MapGoDown");
+            }}>arrow_upward</button>
+        </div>
+      
+        <button className = "material-icons tipmargin" onClick={() => {
             EventBus.dispatch("HideMapController");
             setClassName("toTransparent");
             setStyle({
                 width : "0px",
                 height : "0px"
             })
-        }}>Hide</button>
+        }}>hide_source</button>
     </div>;
 }

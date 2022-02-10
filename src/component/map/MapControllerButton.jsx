@@ -4,6 +4,10 @@ import EventBus from "../../event/EventBus";
 
 export default function(props){
     const [className, setClassName] = useState();
+    const [style, setStyle] = useState({
+        width : window.innerHeight / 20,
+        height : window.innerHeight / 20
+    });
     
     useEffect(() => {
         EventBus.on("HideMapController", () => {
@@ -11,10 +15,10 @@ export default function(props){
         })
     },[]);
 
-    return <button className = {"MapController"} onClick={() => {
+    return <button className = {"MapController material-icons"} onClick={() => {
         setClassName("toRight_300px");
         EventBus.dispatch("ShowMapController");
-    }}>
-        ShowController
+    }} style = {style}>
+        control_camera
     </button>;
 }
