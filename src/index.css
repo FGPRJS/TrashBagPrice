@@ -27,8 +27,8 @@
 }
 
 #SvgWrapper{
-    background-image: url(https://www.freelancerstuff.com/images/thumbs/pattern_001.jpg);
-    /* animation: animatedBackground 10s infinite;
+    background-image: url(https://www.designbolts.com/wp-content/uploads/2013/02/Cubes-Grey-Seamless-Pattern-For-Website-Background.jpg);
+    /* animation: animatedBackground 20s infinite;
     animation-timing-function: linear; */
 }
 
@@ -242,22 +242,28 @@
 
 
 
-
-
-
-
 [type=radio] { 
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
-  }
+}
 /* IMAGE STYLES */
 [type=radio] + img {
     cursor: pointer;
-  }
+    background-color:transparent;
+    transition: .3s;
+}
   
-  /* CHECKED STYLES */
-  [type=radio]:checked + img {
-    outline: 2px solid #f00;
-  }
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+    background-color: #8A8989;
+    transition: .3s;
+}
+
+.search {
+    background-color: transparent;
+    border : 0;
+    outline : 0;
+    bottom : 0;
+}

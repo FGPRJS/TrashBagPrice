@@ -38,8 +38,14 @@ export default function(props){
     },[]);
 
     return <div id= 'RegionSelectorWrapper' style={regionSelectorWrapper}>
-    <div className="fontNanumGothic fontSize32px textCenter">{locationName}</div>
-    <div className = "fontNanumGothic">시/군/구</div>
+    <div className="fontBlackHanSans fontColorBlack textCenter" style={{
+        fontSize : window.innerWidth/30,
+        margin : window.innerWidth/100
+    }}>{locationName}</div>
+    <div className = "fontBlackHanSans fontColorBlack" style={{
+        fontSize : window.innerWidth/50,
+        margin : window.innerWidth/100
+    }}>시/군/구</div>
     <select id="RegionSelection" className="width100per">
     {
         regions.map((item, index) => {
@@ -47,14 +53,18 @@ export default function(props){
         })
     }
     </select>
-    <div className = "fontNanumGothic">쓰레기 종류</div>
+    <div className = "fontBlackHanSans fontColorBlack" style={{
+        fontSize : window.innerWidth/50,
+        margin : window.innerWidth/100
+    }}>쓰레기 종류</div>
     <div id = "trashprposwrapper">
         <label>
             <input type="radio" id = "trashtypeChoice1"
             name="trashprpos" value="생활쓰레기"/>
             <img src = {TrashType["생활쓰레기"]} className = "trashtype" style = {{
             width : window.innerWidth / 20,
-            height : window.innerWidth / 20
+            height : window.innerWidth / 20,
+            margin : window.innerWidth / 100
         }} htmlFor="trashtypeChoice1" ></img>
         </label>
 
@@ -63,7 +73,8 @@ export default function(props){
             name="trashprpos" value="음식물쓰레기"/>
             <img src = {TrashType["음식물쓰레기"]} className = "trashtype" style = {{
             width : window.innerWidth / 20,
-            height : window.innerWidth / 20
+            height : window.innerWidth / 20,
+            margin : window.innerWidth / 100
         }} htmlFor="trashtypeChoice2" ></img>
         </label>
 
@@ -72,11 +83,12 @@ export default function(props){
             name="trashprpos" value=""/>
             <img src = {TrashType["모두"]} className = "trashtype" style = {{
             width : window.innerWidth / 20,
-            height : window.innerWidth / 20
+            height : window.innerWidth / 20,
+            margin : window.innerWidth / 100
         }} htmlFor="trashtypeChoice3" ></img>
         </label>
     </div>
-    <button className="width100per" onClick={(event)=>{
+    <button className="width100per material-icons search" onClick={(event)=>{
         let newQuery = AppQueryMaker.makeBaseQuery();
 
         newQuery.appendConditionQuery('CTPRVN_NM',locationName);
@@ -119,7 +131,6 @@ export default function(props){
         //Fold
         EventBus.dispatch("NonRegionClick", {});
         EventBus.dispatch("Loading", {});
-    }
-    }>search</button>
+    }}>search</button>
         </div>
 }
