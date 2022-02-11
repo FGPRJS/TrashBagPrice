@@ -32,7 +32,9 @@ export default function(props){
     
     
     return <div className={className + " baseBox MapController"} style = {style}>
-        <span className="tipmargin fontBlackHanSans fontColorLight">MAP CONTROLLER</span>
+        <div className="tipmargin fontBlackHanSans fontColorLight" style = {{
+            fontSize : window.innerWidth/60
+        }}>MAP CONTROLLER</div>
 
         <div className="baseflex">
             <button className = "material-icons tipmargin" onClick = {() => {

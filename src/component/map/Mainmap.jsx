@@ -3,6 +3,7 @@ import { ReactSVG } from "react-svg";
 import map from '../../../resource/kr.svg'
 import EventBus from "../../event/EventBus";
 import LocationName from "../../entity/LocationName";
+import gsap from "gsap/all";
 
 class ViewBox {
     constructor(x, y, width, height){
@@ -91,30 +92,30 @@ export default class Mainmap extends React.Component {
     componentDidMount() {
         window.addEventListener('resize', this.updateDimensions);
         EventBus.on('MapZoomIn', () => {
-            this.zoom(1.1);
+            this.animatingZoom(1.1);
         });
         EventBus.on('MapZoomOut', () => {
-            this.zoom(0.9);
+            this.animatingZoom(0.9);
         });
         EventBus.on('MapGoLeft', () => {
             this.current_viewbox.x += 50;
             this.new_viewbox.x = this.current_viewbox.x;
-            this.applyViewBox();
+            this.animatingViewBox();
         });
         EventBus.on('MapGoRight', () => {
             this.current_viewbox.x -= 50;
             this.new_viewbox.x = this.current_viewbox.x;
-            this.applyViewBox();
+            this.animatingViewBox();
         });
         EventBus.on('MapGoUp', () => {
             this.current_viewbox.y += 50;
             this.new_viewbox.y = this.current_viewbox.y;
-            this.applyViewBox();
+            this.animatingViewBox();
         });
         EventBus.on('MapGoDown', () => {
             this.current_viewbox.y -= 50;
             this.new_viewbox.y = this.current_viewbox.y;
-            this.applyViewBox();
+            this.animatingViewBox();
         });
     }
     componentWillUnmount() {
@@ -196,6 +197,14 @@ export default class Mainmap extends React.Component {
         this.svg.setAttribute('viewBox', viewBoxString);
     }
 
+    animatingViewBox(){
+        gsap.to(this.svg, {
+          duration: .3,
+          attr: {viewBox: `${this.new_viewbox.x} ${this.new_viewbox.y} ${this.new_viewbox.width} ${this.new_viewbox.height}`},
+          ease: "power3.inOut"
+        });
+      }
+
     onZoom(event){
         if(event.deltaY > 0){
           this.zoom(0.9);
@@ -204,6 +213,15 @@ export default class Mainmap extends React.Component {
           this.zoom(1.1);
         }
       }
+
+    animatingZoom(div){
+        this.new_viewbox.width /= div;
+        this.new_viewbox.height /= div;
+        this.current_viewbox.width = this.new_viewbox.width;
+        this.current_viewbox.height = this.new_viewbox.height;
+
+        this.animatingViewBox();
+    }
 
     zoom(div){
         this.new_viewbox.width /= div;
