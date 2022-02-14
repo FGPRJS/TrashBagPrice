@@ -60,9 +60,8 @@
     align-items: center;
 
     right: 1%;
-    top : 1%;
+    top : 6%;
     width : 200px;
-    height: 100px;
 
     background-color: #e3e3e3;
     border: 3px solid #676767;
@@ -89,7 +88,20 @@
     
     box-sizing: border-box;
 
-    height: 100%;
+    top : 5%;
+    height: 95%;
+
+    background-color: #e3e3e3;
+    border: 3px solid #676767;
+}
+
+#BookmarkSelector{
+    position: absolute;
+    
+    box-sizing: border-box;
+
+    top : 5%;
+    height: 95%;
 
     background-color: #e3e3e3;
     border: 3px solid #676767;
@@ -157,10 +169,30 @@
     transition : .3s;
 }
 
+.toHeight100px{
+    height : 100px;
+    transition : .3s;
+}
+
 .toWidth0{
     width: 0;
 
     transition : .3s;
+}
+
+#TopRibbon{
+    position : absolute;
+
+    top : 0;
+    height : 5%;
+    width : 100%;
+
+    background-color: #e3e3e3;
+}
+
+.RibbonCategory{
+    position : relative;
+    height : 100%;
 }
 
 #LoadingWindow{
@@ -205,8 +237,38 @@
     right: 10px;
 }
 
+#BookmarkButton{
+    position : fixed;
+    box-sizing: border-box;
+
+    right : 10px;
+    top : 10px;
+
+    background-color: transparent;
+    border : 0;
+    transition: .3s;
+}
+
+#BookmarkButton:hover{
+    background-color: #8A8989;
+    transition: .3s;
+}
+
 .baseflex{
     display: flex;
+}
+
+.rowflex{
+    display: flex;
+    flex-direction: row;
+}
+
+.atLeft{
+    left: 0%;
+}
+
+.atRight{
+    right : 0%;
 }
 
 .tipmargin{
