@@ -4,16 +4,16 @@ import EventBus from "../../event/EventBus";
 
 export default function(props){
     const [locationText, setLocationText] = useState("");
-    const [styleName, setStyleName] = useState("toTransparent");
+    const [styleName, setStyleName] = useState("toTransparent toHeight0");
 
     useEffect(() => {
         EventBus.on('ElementHover',(event)=>{
             setLocationText(event.target);
-            setStyleName("toVisible");
+            setStyleName("toVisible toHeight100px");
         });
         EventBus.on('ElementLeave',(event)=>{
             setLocationText("");
-            setStyleName("toTransparent");
+            setStyleName("toTransparent toHeight0");
         });
     })
 
