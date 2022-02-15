@@ -14,6 +14,7 @@ export default function(props){
     });
     const [className,setClassName] = useState('toTransparent');
     const [data, setData] = useState([]);
+    const [bookmarkStatus,setBookmarkStatus] = useState('star_outline');
 
     useEffect(() => {
         EventBus.on("ShowResultData", (event) => {
@@ -100,7 +101,19 @@ export default function(props){
     });
 
     return <div id = "PriceResult" className={className}>
-        <div className="fontBlackHanSans fontSize24px fontColorLight">{locationname}</div>
+        <div className="rowflex">
+            <div className="material-icons fontSize32px fontColorLight" onClick={
+                ()=> {
+                    if(bookmarkStatus == 'star'){
+                        setBookmarkStatus('star_outline');
+                    }
+                    else{
+                        setBookmarkStatus('star');
+                    }
+                }
+            }>{bookmarkStatus}</div>
+            <div className="fontBlackHanSans fontSize32px fontColorLight">{locationname}</div>
+        </div>
         <div style = {style}>
         {
             childrenList
