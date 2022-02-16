@@ -8,6 +8,7 @@ import PriceResult from "./information/PriceResult.jsx";
 import MapController from "./map/MapController.jsx";
 import MapControllerButton from "./map/MapControllerButton.jsx";
 import TopRibbon from "./userinput/TopRibbon.jsx";
+import UserNotice from "./information/UserNotice.jsx";
 
 
 export default function(props){
@@ -20,6 +21,7 @@ export default function(props){
         </div>
 
         <TopRibbon></TopRibbon>
+        <UserNotice></UserNotice>
         <Loading></Loading>
         <PriceResult></PriceResult>
         <MapControllerButton></MapControllerButton>

@@ -10,7 +10,7 @@ encodeURIComponent('serviceKey') +
 '='+
 'WcEDPByqQrzxWt2k69nksx8Junf7GtDc8n8vGVgDz6hvbT8nvwZk4x1yYztNED3DD%2FD8%2BtiTcsKmkAUXUox%2BeQ%3D%3D'; /*Service Key*/
 
-const url = "http://api.data.go.kr/openapi/tn_pubr_public_weighted_envlp_api"; /*URL*/
+const url : string = "http://api.data.go.kr/openapi/tn_pubr_public_weighted_envlp_api"; /*URL*/
 
 
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -22,20 +22,20 @@ app.listen(app.get('port'), () => {
 
 app.get('/request', (req, res) => {
 
-  let pageNo = req.query.pageNo;
-  let numOfRows = req.query.numOfRows;
-  let type = req.query.type;
-  let CTPRVN_NM = req.query.CTPRVN_NM;
-  let SIGNGU_NM = req.query.SIGNGU_NM;
+  let pageNo : string = req.query.pageNo;
+  let numOfRows  : string = req.query.numOfRows;
+  let type  : string = req.query.type;
+  let CTPRVN_NM  : string = req.query.CTPRVN_NM;
+  let SIGNGU_NM  : string = req.query.SIGNGU_NM;
 
-  let resultQuery = baseQuery 
+  let resultQuery  : string = baseQuery 
   + "&pageNo=" + pageNo
   + "&numOfRows=" + numOfRows
   + "&type=" + type
   + "&CTPRVN_NM=" + CTPRVN_NM
   + "&SIGNGU_NM=" + SIGNGU_NM
 
-  const result = url + resultQuery;
+  const result  : string = url + resultQuery;
 
   httpGet(result).then((response) => {
     res.send(response);

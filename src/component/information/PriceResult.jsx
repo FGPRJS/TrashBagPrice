@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import EventBus from "../../event/EventBus";
 import PriceDetails from "./PriceDetails.jsx";
 import PriceProperty from "../../entity/PriceProperty.js";
@@ -7,16 +7,16 @@ import TypeDetails from "./TypeDetails.jsx";
 import TrashType from "../../entity/TrashType.js";
 import Label from "../../entity/Label.jsx";
 
-export default function(props){
-    const [style, setStyle] = useState({
+export default function PriceResult(props){
+    const [style, setStyle] = React.useState({
         height : 0,
         transition : "0.3s"
     });
-    const [className,setClassName] = useState('toTransparent');
-    const [data, setData] = useState([]);
-    const [bookmarkStatus,setBookmarkStatus] = useState('star_outline');
+    const [className,setClassName] = React.useState('toTransparent');
+    const [data, setData] = React.useState([]);
+    const [bookmarkStatus,setBookmarkStatus] = React.useState('star_outline');
 
-    useEffect(() => {
+    React.useEffect(() => {
         EventBus.on("ShowResultData", (event) => {
             setStyle({
                 height : window.innerHeight / 2,
@@ -44,7 +44,7 @@ export default function(props){
     },[]);
 
     //Render
-    let locationname = ""
+    let locationName = "";
     const childrenList = [];
     
     data.map((item, index) => {
@@ -52,7 +52,7 @@ export default function(props){
         const typechildren = [Label["TagLabel"]];
 
         //Make locationName
-        locationname = item["ctprvnNm"] + " " + item["signguNm"];
+        locationName = item["ctprvnNm"] + " " + item["signguNm"];
 
 
         let key = "";
@@ -101,18 +101,20 @@ export default function(props){
     });
 
     return <div id = "PriceResult" className={className}>
-        <div className="rowflex">
+        <div className="rowflex tipmargin">
             <div className="material-icons fontSize32px fontColorLight" onClick={
                 ()=> {
                     if(bookmarkStatus == 'star'){
                         setBookmarkStatus('star_outline');
+                        EventBus.dispatch("Notice", {message : "북마크 해제"});
                     }
                     else{
                         setBookmarkStatus('star');
+                        EventBus.dispatch("Notice", {message : "북마크 등록"});
                     }
                 }
             }>{bookmarkStatus}</div>
-            <div className="fontBlackHanSans fontSize32px fontColorLight">{locationname}</div>
+            <div className="fontBlackHanSans fontSize32px fontColorLight">{locationName}</div>
         </div>
         <div style = {style}>
         {
