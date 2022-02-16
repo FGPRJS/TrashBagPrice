@@ -326,6 +326,10 @@
     font-family: 'Nanum Gothic', sans-serif;
 }
 
+.fontSize0px{
+    font-size: 0px;
+}
+
 .fontSize24px{
     font-size: 20px;
 }
@@ -365,7 +369,7 @@
     transition: .3s;
 }
 
-.search {
+#searchButton {
     background-color: transparent;
     border: 0;
     outline : 0;
@@ -375,8 +379,14 @@
     bottom: 0;
 
     cursor: pointer;
-}
 
+    transition: .3s;
+}
+#searchButton:hover{
+    background-color: #8A8989;
+
+    transition: .3s;
+}
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }

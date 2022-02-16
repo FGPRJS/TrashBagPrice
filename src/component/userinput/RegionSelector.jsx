@@ -88,7 +88,7 @@ export default function(props){
         }} htmlFor="trashtypeChoice3" ></img>
         </label>
     </div>
-    <button className="width100per material-icons search" onClick={(event)=>{
+    <button id = "searchButton" className="width100per material-icons" onClick={(event)=>{
         let newQuery = AppQueryMaker.makeBaseQuery();
 
         newQuery.appendConditionQuery('CTPRVN_NM',locationName);

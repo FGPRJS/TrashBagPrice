@@ -15,6 +15,7 @@ export default function PriceResult(props){
     const [className,setClassName] = React.useState('toTransparent');
     const [data, setData] = React.useState([]);
     const [bookmarkStatus,setBookmarkStatus] = React.useState('star_outline');
+    const [infoClassName, setInfoClassName] = React.useState('fontSize0px');
 
     React.useEffect(() => {
         EventBus.on("ShowResultData", (event) => {
@@ -24,6 +25,7 @@ export default function PriceResult(props){
             });
             setClassName('toVisible');
             setData(event.result.response.body.items);
+            setInfoClassName('fontSize32px');
         });
         EventBus.on("RegionClick", () => {
             setStyle({
@@ -32,6 +34,7 @@ export default function PriceResult(props){
             });
             setClassName('toTransparent');
             setData([]);
+            setInfoClassName('fontSize0px');
         });
         EventBus.on("NonRegionClick", () => {
             setStyle({
@@ -40,6 +43,7 @@ export default function PriceResult(props){
             });
             setClassName('toTransparent');
             setData([]);
+            setInfoClassName('fontSize0px');
         });
     },[]);
 
@@ -101,8 +105,8 @@ export default function PriceResult(props){
     });
 
     return <div id = "PriceResult" className={className}>
-        <div className="rowflex tipmargin">
-            <div className="material-icons fontSize32px fontColorLight" onClick={
+        <div className="rowflex">
+            <div className= {infoClassName + " material-icons fontColorLight"} onClick={
                 ()=> {
                     if(bookmarkStatus == 'star'){
                         setBookmarkStatus('star_outline');
@@ -114,7 +118,7 @@ export default function PriceResult(props){
                     }
                 }
             }>{bookmarkStatus}</div>
-            <div className="fontBlackHanSans fontSize32px fontColorLight">{locationName}</div>
+            <div className= {infoClassName + " fontBlackHanSans fontColorLight"}>{locationName}</div>
         </div>
         <div style = {style}>
         {
