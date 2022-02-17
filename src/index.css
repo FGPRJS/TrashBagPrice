@@ -124,6 +124,16 @@
     transition: .3s;
 }
 
+.toTop5p{
+    top : 5%;
+    transition : .3s;
+}
+
+.toTopN5p{
+    top : -5%;
+    transition: .3s;
+}
+
 .toRight_300px{
     right : 300px;
 
@@ -207,9 +217,13 @@
     position : absolute;
     box-sizing: border-box;
 
-    top : 5%;
-    left : auto;
-    right : auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    height : fit-content;
+    width : fit-content;
 
     background-color: #e3e3e3;
     border: 3px solid #676767;

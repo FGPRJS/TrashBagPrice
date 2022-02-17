@@ -3,20 +3,20 @@ import EventBus from "../../event/EventBus";
 
 export default function(props){
     const [message, setMessage] = useState("");
-    const [className, setClassName] = useState("toHeight0 toTransparent");
+    const [className, setClassName] = useState("toTopN5p toTransparent");
 
 
     useEffect(()=>{
         EventBus.on("Notice", (data)=>{
             setMessage(data.message);
-            setClassName("toVisible toFitContent");
+            setClassName("toTop5p toVisible");
             setTimeout(()=>{
-                setClassName("toHeight0 toTransparent");
+                setClassName("toTopN5p toTransparent");
             }, 1000);
         })
     },[]);
     
-    return <div id = "UserNotice" className={className}>
+    return <div id = "UserNotice" className={className + " fontSize32px"}>
         {message}
     </div>;
 }
