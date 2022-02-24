@@ -6,6 +6,7 @@ import TrashProperty from "../../entity/TrashProperty.js";
 import TypeDetails from "./TypeDetails.jsx";
 import TrashType from "../../entity/TrashType.js";
 import Label from "../../entity/Label.jsx";
+import bookmark from "../../data/Bookmark";
 
 export default function PriceResult(props){
     const [style, setStyle] = React.useState({
@@ -14,17 +15,36 @@ export default function PriceResult(props){
     });
     const [className,setClassName] = React.useState('toTransparent');
     const [data, setData] = React.useState([]);
+
+    const [locationName, setLocationName] = React.useState("");
+
     const [bookmarkStatus,setBookmarkStatus] = React.useState('star_outline');
     const [infoClassName, setInfoClassName] = React.useState('fontSize0px');
 
     React.useEffect(() => {
+        console.log(bookmark.readCookie());
         EventBus.on("ShowResultData", (event) => {
             setStyle({
                 height : window.innerHeight / 2,
                 transition : "0.3s"
             });
             setClassName('toVisible');
-            setData(event.result.response.body.items);
+
+            let tempData = event.result.response.body.items;
+            setData(tempData);
+
+            //Make locationName
+            if(tempData.length > 0){
+                let target = tempData[0];
+                let tempLocationName = target["ctprvnNm"] + " " + target["signguNm"];
+                setLocationName(tempLocationName)
+                if(bookmark.data.has(tempLocationName)){
+                    setBookmarkStatus('star');
+                }
+                else{
+                    setBookmarkStatus('star_outline');
+                }
+            }
             setInfoClassName('fontSize32px');
         });
         EventBus.on("RegionClick", () => {
@@ -48,19 +68,15 @@ export default function PriceResult(props){
     },[]);
 
     //Render
-    let locationName = "";
     const childrenList = [];
-    
+
     data.map((item, index) => {
         const children = [Label["PriceLabel"]];
         const typechildren = [Label["TagLabel"]];
 
-        //Make locationName
-        locationName = item["ctprvnNm"] + " " + item["signguNm"];
-
-
         let key = "";
 
+        //add Type
         for(const property in TrashProperty){
             key += item[property];
             key += "_";
@@ -75,6 +91,7 @@ export default function PriceResult(props){
             }
         }
 
+        //add Price
         for(const property in PriceProperty){
             if(item[property] != "0"){
                 children.push(
@@ -108,12 +125,16 @@ export default function PriceResult(props){
         <div className="rowflex">
             <div className= {infoClassName + " material-icons fontColorLight"} onClick={
                 ()=> {
-                    if(bookmarkStatus == 'star'){
+                    if(bookmark.data.has(locationName)){
                         setBookmarkStatus('star_outline');
+                        bookmark.remove(locationName);
+                        bookmark.updateCookie();
                         EventBus.dispatch("Notice", {message : "북마크 해제"});
                     }
                     else{
                         setBookmarkStatus('star');
+                        bookmark.add(locationName);
+                        bookmark.updateCookie();
                         EventBus.dispatch("Notice", {message : "북마크 등록"});
                     }
                 }
