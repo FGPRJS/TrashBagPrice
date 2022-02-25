@@ -5,39 +5,23 @@ import EventBus from "../../event/EventBus";
 import AppQueryMaker from "../communicator/AppQueryMaker";
 
 export default function(props){
-    const [regionSelectorWrapper, setRegionSelectorWrapper] = useState({
-        width : window.innerWidth / 3,
-        left : -window.innerWidth / 3,
-        transition: '.3s'
-    });
+    
     const [locationName, setLocationName] = useState("");
     const [regions, setRegions] = useState([]);
 
     useEffect(() => {
         EventBus.on("RegionClick", (event) => {
-            setRegionSelectorWrapper(
-            {
-                width : window.innerWidth / 3,
-                left: 0,
-                transition: '.3s'
-            });
             setLocationName(event.target);
             setRegions(RegionName[event.target]);
         }
         );
         EventBus.on("NonRegionClick", () => {
-            setRegionSelectorWrapper(
-                {
-                    width : window.innerWidth / 3,
-                    left : -window.innerWidth / 3,
-                    transition: '.3s'
-                });
-                setLocationName("");
-                setRegions([]);
+            setLocationName("");
+            setRegions([]);
         })
     },[]);
 
-    return <div id= 'RegionSelectorWrapper' style={regionSelectorWrapper}>
+    return <div>
     <div className="fontBlackHanSans fontColorBlack textCenter" style={{
         fontSize : window.innerWidth/30,
         margin : window.innerWidth/100
@@ -132,5 +116,5 @@ export default function(props){
         EventBus.dispatch("NonRegionClick", {});
         EventBus.dispatch("Loading", {});
     }}>search</button>
-        </div>
+    </div>
 }

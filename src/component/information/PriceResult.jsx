@@ -22,7 +22,6 @@ export default function PriceResult(props){
     const [infoClassName, setInfoClassName] = React.useState('fontSize0px');
 
     React.useEffect(() => {
-        console.log(bookmark.readCookie());
         EventBus.on("ShowResultData", (event) => {
             setStyle({
                 height : window.innerHeight / 2,

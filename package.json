@@ -6,6 +6,8 @@
     "start": "NODE_ENV=start node ./server/server.cjs"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
     "@rails/webpacker": "^5.4.3",
     "express": "^4.17.2",
     "gsap": "^3.9.1",

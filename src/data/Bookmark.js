@@ -13,7 +13,6 @@ class Bookmark {
             result += d + ",";
         }
         result = "bookmark=" + result;
-        console.log(result);
         document.cookie = result
     }
     readCookie(){
