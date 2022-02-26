@@ -37,7 +37,7 @@ export default function PriceResult(props){
                 let target = tempData[0];
                 let tempLocationName = target["ctprvnNm"] + " " + target["signguNm"];
                 setLocationName(tempLocationName)
-                if(bookmark.data.has(tempLocationName)){
+                if(bookmark.has(tempLocationName)){
                     setBookmarkStatus('star');
                 }
                 else{
@@ -124,7 +124,7 @@ export default function PriceResult(props){
         <div className="rowflex">
             <div className= {infoClassName + " material-icons fontColorLight"} onClick={
                 ()=> {
-                    if(bookmark.data.has(locationName)){
+                    if(bookmark.has(locationName)){
                         setBookmarkStatus('star_outline');
                         bookmark.remove(locationName);
                         bookmark.updateCookie();

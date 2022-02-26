@@ -1,11 +1,28 @@
+import EventBus from "../event/EventBus.js";
+
 class Bookmark {
-    data = new Set();
+    data = [];
     
     add(new_value){
-        this.data.add(new_value);
+        this.data.push(new_value);
+    }
+    findIndex(target){
+        const index = this.data.indexOf(target);
+        return index;
+    }
+    has(target){
+        if(this.findIndex(target) > -1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     remove(target){
-        this.data.delete(target);
+        const index = this.findIndex(target);
+        if(index > -1){
+            this.data.splice(index, 1);
+        }
     }
     updateCookie(){
         let result = "";
@@ -13,7 +30,8 @@ class Bookmark {
             result += d + ",";
         }
         result = "bookmark=" + result;
-        document.cookie = result
+        document.cookie = result;
+        EventBus.dispatch("BookmarkUpdate",{data:this.data});
     }
     readCookie(){
         let cookie = document.cookie;
@@ -26,7 +44,7 @@ class Bookmark {
             bookmarkStrings = bookmarkStrings.split('=');
             bookmarkString = bookmarkStrings[1];
         }
-        this.data = new Set(bookmarkString.split(','));
+        this.data = bookmarkString.split(',');
 
         return this.data;
     }
